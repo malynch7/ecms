@@ -20,7 +20,7 @@ public class UserMapper implements RowMapper<User> {
         String firstName = rs.getString("first_name");
         String lastName = rs.getString("last_name");
 
-        return new User(userId, userName, encryptedPassword, firstName, lastName);
+        return new User((long) userId, userName, encryptedPassword, firstName, lastName);
     }
 
 }

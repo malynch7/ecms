@@ -2,7 +2,7 @@ package com.beigeoranges.ecms.Model;
 
 public class UserForm {
 
-    private long userId;
+    private Long userId;
     private String firstName;
     private String lastName;
     private boolean enabled;
@@ -14,7 +14,7 @@ public class UserForm {
 
     }
 
-    public UserForm(long userId, String firstName, String lastName, boolean enabled, String email, String password, String confirmPassword) {
+    public UserForm(Long userId, String firstName, String lastName, boolean enabled, String email, String password, String confirmPassword) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -24,11 +24,11 @@ public class UserForm {
         this.confirmPassword = confirmPassword;
     }
 
-    public long getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(long userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 

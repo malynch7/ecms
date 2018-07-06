@@ -17,7 +17,7 @@ public class RegistrationValidator implements Validator {
     private EmailValidator emailValidator = EmailValidator.getInstance();
 
     @Autowired
-    private UserDao UserDao;
+    private UserDao userDao;
 
     // The classes are supported by this validator.
     @Override
@@ -27,7 +27,7 @@ public class RegistrationValidator implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
-        UserForm UserForm = (UserForm) target;
+        UserForm userForm = (UserForm) target;
 
         // Check the fields of AppUserForm.
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "NotEmpty.UserForm.email");
@@ -35,19 +35,18 @@ public class RegistrationValidator implements Validator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastName", "NotEmpty.UserForm.lastName");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty.UserForm.password");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "confirmPassword", "NotEmpty.UserForm.confirmPassword");
-
-        if (!this.emailValidator.isValid(UserForm.getEmail())) {
+        if (!this.emailValidator.isValid(userForm.getEmail())) {
             // Invalid email.
             errors.rejectValue("email", "Pattern.UserForm.email");
-        } else if (UserForm.getUserId() == Integer.parseInt(null)) {
-            User dbUser = UserDao.findUserByEmail(UserForm.getEmail());
+        } else if (userForm.getUserId() == null) {
+            User dbUser = userDao.findUserByEmail(userForm.getEmail());
             if (dbUser != null) {
                 // Email has been used by another account.
                 errors.rejectValue("email", "Duplicate.UserForm.email");
             }
         }
         if (!errors.hasErrors()) {
-            if (!UserForm.getConfirmPassword().equals(UserForm.getPassword())) {
+            if (!userForm.getConfirmPassword().equals(userForm.getPassword())) {
                 errors.rejectValue("confirmPassword", "Match.UserForm.confirmPassword");
             }
         }

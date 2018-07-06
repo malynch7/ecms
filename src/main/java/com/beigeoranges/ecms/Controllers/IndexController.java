@@ -26,32 +26,15 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class IndexController {
 
-    private UserDao userDao;
-    private RegistrationValidator registrationValidator;
 
-    @InitBinder
-    protected void initBinder(WebDataBinder dataBinder) {
-        // Form target
-        Object target = dataBinder.getTarget();
-        if (target == null) {
-            return;
-        }
-        System.out.println("Target=" + target);
-
-        if (target.getClass() == UserForm.class) {
-            dataBinder.setValidator(registrationValidator);
-        }
-        // ...
-    }
-
-    @RequestMapping(value = { "/" }, method = RequestMethod.GET)
+    @RequestMapping(value = {"/"}, method = RequestMethod.GET)
     public String welcomePage(Model model) {
         model.addAttribute("title", "Welcome");
         model.addAttribute("message", "This is welcome page!");
         return "index";
     }
 
-    @RequestMapping(value = {"/admin","/admin/**"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/admin", "/admin/**"}, method = RequestMethod.GET)
     public String adminPage(Model model, Principal principal) {
 
         User loginedUser = (User) ((Authentication) principal).getPrincipal();
@@ -117,38 +100,5 @@ public class IndexController {
         return "redirect:/player/dashboard";
     }
 
-
-
-    @RequestMapping(value = "/registration", method = RequestMethod.GET)
-    public String viewRegister(Model model) {
-        UserForm form = new UserForm();
-        model.addAttribute("userForm", form);
-
-        return "registration";
-    }
-
-    @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String saveRegister(Model model,
-        @ModelAttribute("userForm") @Validated UserForm userForm, //
-        BindingResult result, //
-        final RedirectAttributes redirectAttributes) {
-
-            // Validate result
-            if (result.hasErrors()) {
-
-                return "registration";
-            }
-            com.beigeoranges.ecms.Model.User newUser= null;
-            try {
-                newUser = userDao.createUser(userForm);
-            }
-            // Other error!!
-            catch (Exception e) {
-                model.addAttribute("errorMessage", "Error: " + e.getMessage());
-                return "registration";
-            }
-
-            return "redirect:/login";
-    }
 
 }

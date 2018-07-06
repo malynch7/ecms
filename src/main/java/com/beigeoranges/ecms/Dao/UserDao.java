@@ -38,21 +38,27 @@ public class UserDao extends JdbcDaoSupport {
     }
 
     public int getMaxUserId(){
+        System.out.println(getJdbcTemplate().queryForObject("SELECT MAX(user_id) FROM users", Integer.class));
+
         return getJdbcTemplate().queryForObject("SELECT MAX(user_id) FROM users", Integer.class);
+
     }
 
     public User createUser(UserForm form){
         String encryptedPassword = EncryptedPasswordUtils.encryptPassword(form.getPassword());
 
-        String sqlcreateuser ="INSERT INTO users (email,typeofuser, first_name, last_name,encrypted_password, enabled) VALUE(?,?,?,?,?)";
+        String sqlcreateuser ="INSERT INTO users (email,typeofuser, first_name, last_name,encrypted_password, enabled) VALUE(?,?,?,?,?,?)";
         String email = form.getEmail();
         String password = encryptedPassword;
         String first_name = form.getFirstName();
         String last_name  = form.getLastName();
+        String typeofuser = "ADMIN";
+        int enable = 0;
+        System.out.println("did this not work");
 
 
-        getJdbcTemplate().update(sqlcreateuser, email,1,first_name,last_name,password,1);
-        User user = new User(getMaxUserId(),email,password,first_name,last_name);
+        getJdbcTemplate().update(sqlcreateuser, email,typeofuser,first_name,last_name,password,enable);
+        User user = new User((long) getMaxUserId(),email,password,first_name,last_name);
 
         return user;
     }
