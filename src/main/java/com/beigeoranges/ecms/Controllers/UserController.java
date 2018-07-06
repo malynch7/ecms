@@ -69,15 +69,13 @@ public class UserController {
         User newUser = null;
         try {
             newUser = userDao.createUser(userForm);
-            System.out.println("did this not work");
         }
         // Other error!!
         catch (Exception e) {
             model.addAttribute("errorMessage", "Error: " + e.getMessage());
-            System.out.println("did this not work");
             return "registration";
         }
-        redirectAttributes.addFlashAttribute("flashUser", newUser);
+        //redirectAttributes.addFlashAttribute("flashUser", newUser);
 
         return "redirect:/login";
     }

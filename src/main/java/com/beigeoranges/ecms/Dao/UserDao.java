@@ -38,8 +38,6 @@ public class UserDao extends JdbcDaoSupport {
     }
 
     public int getMaxUserId(){
-        System.out.println(getJdbcTemplate().queryForObject("SELECT MAX(user_id) FROM users", Integer.class));
-
         return getJdbcTemplate().queryForObject("SELECT MAX(user_id) FROM users", Integer.class);
 
     }
@@ -52,9 +50,8 @@ public class UserDao extends JdbcDaoSupport {
         String password = encryptedPassword;
         String first_name = form.getFirstName();
         String last_name  = form.getLastName();
-        String typeofuser = "ADMIN";
+        String typeofuser = "";
         int enable = 0;
-        System.out.println("did this not work");
 
 
         getJdbcTemplate().update(sqlcreateuser, email,typeofuser,first_name,last_name,password,enable);
@@ -76,8 +73,10 @@ public class UserDao extends JdbcDaoSupport {
 
     public User findUserByEmail(String email) {
         User user = new User();
-        return user;
-    }
+        String sqlgetuserbyemail = "SELECT * FROM users WHERE email = "+email+"";
+
+            return null;
+        }
 
 
 }
