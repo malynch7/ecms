@@ -24,15 +24,9 @@
 <div th:if="${errorMessage != null}"
      th:utext="${errorMessage}" class="error">...</div>
 
-<form th:action="@{/registration}" th:object="${UserForm}" method="POST">
+<form th:action="@{/registration}" th:object="${userForm}" method="POST">
     <table>
-        <tr>
-            <td>Email</td>
-            <td><input type="text" th:field="*{email}" /> </td>
-            <td>
-                <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">..</span>
-            </td>
-        </tr>
+
         <tr>
             <td>Password</td>
             <td><input type="password" th:field="*{password}" /> </td>
@@ -47,7 +41,13 @@
                 <span th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}">..</span>
             </td>
         </tr>
-
+        <tr>
+            <td>Email</td>
+            <td><input type="text" th:field="*{email}" /> </td>
+            <td>
+                <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">..</span>
+            </td>
+        </tr>
         <tr>
             <td>First Name</td>
             <td><input type="text" th:field="*{firstName}" /> </td>

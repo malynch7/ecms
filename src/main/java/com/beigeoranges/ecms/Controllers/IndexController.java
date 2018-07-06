@@ -122,7 +122,7 @@ public class IndexController {
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String viewRegister(Model model) {
         UserForm form = new UserForm();
-        model.addAttribute("UserForm", form);
+        model.addAttribute("userForm", form);
 
         return "registration";
     }
