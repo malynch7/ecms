@@ -16,6 +16,8 @@ public class RegistrationValidator implements Validator {
     // common-validator library.
     private EmailValidator emailValidator = EmailValidator.getInstance();
 
+    String adminCode = "admincode";
+
     @Autowired
     private UserDao userDao;
 
@@ -35,9 +37,15 @@ public class RegistrationValidator implements Validator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastName", "NotEmpty.UserForm.lastName");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty.UserForm.password");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "confirmPassword", "NotEmpty.UserForm.confirmPassword");
+
         if (!this.emailValidator.isValid(userForm.getEmail())) {
             // Invalid email.
             errors.rejectValue("email", "Pattern.UserForm.email");
+        }
+        if (!userForm.getAdminCode().equals("") && !userForm.getAdminCode().equals(adminCode) ) {
+            // Invalid admin code.
+            errors.rejectValue("adminCode", "Pattern.UserForm.adminCode");
+
         } else if (userForm.getUserId() == null) {
             User dbUser = userDao.findUserByEmail(userForm.getEmail());
             if (dbUser != null) {

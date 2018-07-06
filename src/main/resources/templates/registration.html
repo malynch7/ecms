@@ -63,7 +63,13 @@
             </td>
         </tr>
         <tr>
-
+        <tr>
+            <td>Admin Code</td>
+            <td><input type="text" placeholder="Leave blank if not admin" th:field="*{adminCode}" /> </td>
+            <td>
+                <span th:if="${#fields.hasErrors('adminCode')}" th:errors="*{adminCode}">..</span>
+            </td>
+        </tr>
         </tr>
         <tr>
             <td>&nbsp;</td>

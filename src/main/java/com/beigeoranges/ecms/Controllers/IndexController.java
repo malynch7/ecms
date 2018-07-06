@@ -64,7 +64,7 @@ public class IndexController {
         return "player/dashboard";
     }
 
-    @RequestMapping(value = "/403", method = RequestMethod.GET)
+    @RequestMapping(value = "/error/access-denied", method = RequestMethod.GET)
     public String accessDenied(Model model, Principal principal) {
 
         if (principal != null) {
@@ -80,7 +80,7 @@ public class IndexController {
 
         }
 
-        return "403Page";
+        return "error/access-denied";
     }
 
     @RequestMapping("/diverter")

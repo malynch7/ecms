@@ -55,7 +55,17 @@ public class UserDao extends JdbcDaoSupport {
 
 
         getJdbcTemplate().update(sqlcreateuser, email,typeofuser,first_name,last_name,password,enable);
-        User user = new User((long) getMaxUserId(),email,password,first_name,last_name);
+        long userId = (long) getMaxUserId();
+        User user = new User(userId,email,password,first_name,last_name);
+
+        //assign role to user_role
+        String sqlAssignRole ="INSERT INTO user_role (user_id,role_id) VALUE(?,?)";
+        if(!form.getAdminCode().equals("")){
+            getJdbcTemplate().update(sqlAssignRole, userId, 1);
+        }else{
+            getJdbcTemplate().update(sqlAssignRole, userId, 2);
+
+        }
 
         return user;
     }

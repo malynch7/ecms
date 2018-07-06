@@ -10,11 +10,13 @@ public class UserForm {
     private String password;
     private String confirmPassword;
 
+    private String adminCode;
+
     public UserForm() {
 
     }
 
-    public UserForm(Long userId, String firstName, String lastName, boolean enabled, String email, String password, String confirmPassword) {
+    public UserForm(Long userId, String firstName, String lastName, boolean enabled, String email, String password, String confirmPassword, String adminCode) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -22,6 +24,8 @@ public class UserForm {
         this.email = email;
         this.password = password;
         this.confirmPassword = confirmPassword;
+        this.adminCode = adminCode;
+
     }
 
     public Long getUserId() {
@@ -78,5 +82,13 @@ public class UserForm {
 
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
+    }
+
+    public String getAdminCode() {
+        return adminCode;
+    }
+
+    public void setAdminCode(String adminCode) {
+        this.adminCode = adminCode;
     }
 }
