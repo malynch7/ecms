@@ -3,23 +3,14 @@ package com.beigeoranges.ecms.Controllers;
 
 import java.security.Principal;
 
-//import com.beigeoranges.ecms.Model.User;
-import com.beigeoranges.ecms.Dao.UserDao;
-import com.beigeoranges.ecms.Model.UserForm;
-import com.beigeoranges.ecms.Utils.RegistrationValidator;
+
 import com.beigeoranges.ecms.Utils.WebUtils;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 

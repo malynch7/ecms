@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" style="border: 1px solid #ccc;padding:5px;margin-bottom:20px;">
+<head>
+    <title>Create Event</title>
+    <h1>Create Event</h1>
+</head>
+
+<body>
+<form th:action="@{/createEvent}" th:object="${eventForm}" method="POST">
+    <table>
+
+        <tr>
+            <td>Password</td>
+            <td><input type="password" th:field="*{password}" /> </td>
+            <td>
+                <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}">..</span>
+            </td>
+        </tr>
+        <tr>
+            <td>Confirm</td>
+            <td><input type="password" th:field="*{confirmPassword}" /> </td>
+            <td>
+                <span th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}">..</span>
+            </td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td><input type="text" th:field="*{email}" /> </td>
+            <td>
+                <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">..</span>
+            </td>
+        </tr>
+        <tr>
+            <td>First Name</td>
+            <td><input type="text" th:field="*{firstName}" /> </td>
+            <td>
+                <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">..</span>
+            </td>
+        </tr>
+        <tr>
+            <td>Last Name</td>
+            <td><input type="text" th:field="*{lastName}" /> </td>
+            <td>
+                <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">..</span>
+            </td>
+        </tr>
+        <tr>
+
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>
+                <input type="submit" value="Submit" />
+                <a th:href="@{/}">Cancel</a>
+            </td>
+            <td>&nbsp;</td>
+        </tr>
+    </table>
+</form>
+</body>
+
+</html>
+
