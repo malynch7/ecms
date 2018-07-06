@@ -14,6 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,8 +26,23 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class IndexController {
 
-    private UserDao UserDao;
-    private RegistrationValidator RegistrationValidator;
+    private UserDao userDao;
+    private RegistrationValidator registrationValidator;
+
+    @InitBinder
+    protected void initBinder(WebDataBinder dataBinder) {
+        // Form target
+        Object target = dataBinder.getTarget();
+        if (target == null) {
+            return;
+        }
+        System.out.println("Target=" + target);
+
+        if (target.getClass() == UserForm.class) {
+            dataBinder.setValidator(registrationValidator);
+        }
+        // ...
+    }
 
     @RequestMapping(value = { "/" }, method = RequestMethod.GET)
     public String welcomePage(Model model) {
@@ -100,6 +117,8 @@ public class IndexController {
         return "redirect:/player/dashboard";
     }
 
+
+
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String viewRegister(Model model) {
         UserForm form = new UserForm();
@@ -110,7 +129,7 @@ public class IndexController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String saveRegister(Model model,
-        @ModelAttribute("UserForm") @Validated UserForm UserForm, //
+        @ModelAttribute("userForm") @Validated UserForm userForm, //
         BindingResult result, //
         final RedirectAttributes redirectAttributes) {
 
@@ -121,7 +140,7 @@ public class IndexController {
             }
             com.beigeoranges.ecms.Model.User newUser= null;
             try {
-                newUser = UserDao.createUser(UserForm);
+                newUser = userDao.createUser(userForm);
             }
             // Other error!!
             catch (Exception e) {
@@ -129,7 +148,7 @@ public class IndexController {
                 return "registration";
             }
 
-            return "login";
+            return "redirect:/login";
     }
 
 }

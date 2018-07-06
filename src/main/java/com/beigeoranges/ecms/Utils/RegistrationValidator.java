@@ -27,29 +27,28 @@ public class RegistrationValidator implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
-        UserForm appUserForm = (UserForm) target;
+        UserForm UserForm = (UserForm) target;
 
         // Check the fields of AppUserForm.
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "NotEmpty.appUserForm.email");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstName", "NotEmpty.appUserForm.firstName");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastName", "NotEmpty.appUserForm.lastName");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty.appUserForm.password");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "confirmPassword", "NotEmpty.appUserForm.confirmPassword");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "NotEmpty.UserForm.email");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstName", "NotEmpty.UserForm.firstName");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastName", "NotEmpty.UserForm.lastName");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty.UserForm.password");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "confirmPassword", "NotEmpty.UserForm.confirmPassword");
 
-        if (!this.emailValidator.isValid(appUserForm.getEmail())) {
+        if (!this.emailValidator.isValid(UserForm.getEmail())) {
             // Invalid email.
-            errors.rejectValue("email", "Pattern.appUserForm.email");
-        } else if (appUserForm.getUserId() == null) {
-            User dbUser = UserDao.findUserByEmail(appUserForm.getEmail());
+            errors.rejectValue("email", "Pattern.UserForm.email");
+        } else if (UserForm.getUserId() == Integer.parseInt(null)) {
+            User dbUser = UserDao.findUserByEmail(UserForm.getEmail());
             if (dbUser != null) {
                 // Email has been used by another account.
-                errors.rejectValue("email", "Duplicate.appUserForm.email");
+                errors.rejectValue("email", "Duplicate.UserForm.email");
             }
         }
-
         if (!errors.hasErrors()) {
-            if (!appUserForm.getConfirmPassword().equals(appUserForm.getPassword())) {
-                errors.rejectValue("confirmPassword", "Match.appUserForm.confirmPassword");
+            if (!UserForm.getConfirmPassword().equals(UserForm.getPassword())) {
+                errors.rejectValue("confirmPassword", "Match.UserForm.confirmPassword");
             }
         }
     }

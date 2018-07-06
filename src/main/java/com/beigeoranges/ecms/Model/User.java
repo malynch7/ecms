@@ -3,7 +3,7 @@ package com.beigeoranges.ecms.Model;
 
 public class User {
 
-    private int userId;
+    private long userId;
     private String email;
     private String encryptedPassword;
     private String firstName;
@@ -13,7 +13,7 @@ public class User {
 
     }
 
-    public User(int userId, String email, String encryptedPassword, String firstName, String lastName) {
+    public User(long userId, String email, String encryptedPassword, String firstName, String lastName) {
         this.userId = userId;
         this.email = email;
         this.encryptedPassword = encryptedPassword;
@@ -22,11 +22,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public int getUserId() {
+    public long getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(long userId) {
         this.userId = userId;
     }
 
