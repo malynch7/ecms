@@ -18,15 +18,17 @@ public class EventController {
     @Autowired
     private EventDao eventDao;
 
-    @RequestMapping(value = {"/createEvent"}, method = RequestMethod.GET)
+    @RequestMapping(value = "/createEvent", method = RequestMethod.GET)
     public String viewCreateEventPage(Model model) {
-        Event form = new Event();
-        model.addAttribute("eventForm", form);
+        Event event = new Event();
+
+        model.addAttribute("event", event);
+
         return "createEvent";
     }
 
-    @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String saveEvent(Model model, @ModelAttribute("userForm") @Validated Event event, BindingResult result) {
+    @RequestMapping(value = "/createEvent", method = RequestMethod.POST)
+    public String saveEvent(Model model, @ModelAttribute(value="event") Event event, BindingResult result, final RedirectAttributes redirectAttributes) {
 
         // Validate result
         if (result.hasErrors()) {
