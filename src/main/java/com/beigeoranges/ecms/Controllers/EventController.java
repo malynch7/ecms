@@ -18,21 +18,21 @@ public class EventController {
     @Autowired
     private EventDao eventDao;
 
-    @RequestMapping(value = "/createEvent", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/createEvent", method = RequestMethod.GET)
     public String viewCreateEventPage(Model model) {
         Event event = new Event();
 
         model.addAttribute("event", event);
 
-        return "createEvent";
+        return "admin/createEvent";
     }
 
-    @RequestMapping(value = "/createEvent", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/createEvent", method = RequestMethod.POST)
     public String saveEvent(Model model, @ModelAttribute(value="event") Event event, BindingResult result, final RedirectAttributes redirectAttributes) {
 
         // Validate result
         if (result.hasErrors()) {
-            return "createEvent";
+            return "admin/createEvent";
         }
         try {
             eventDao.createEvent(event);
@@ -40,8 +40,8 @@ public class EventController {
         // Other error!!
         catch (Exception e) {
             model.addAttribute("errorMessage", "Error: " + e.getMessage());
-            return "createEvent";
+            return "admin/createEvent";
         }
-        return "redirect:/createEvent";
+        return "redirect:/admin/createEvent";
     }
 }
