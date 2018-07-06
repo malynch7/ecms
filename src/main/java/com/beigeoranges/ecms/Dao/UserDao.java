@@ -4,6 +4,8 @@ import javax.sql.DataSource;
 
 import com.beigeoranges.ecms.Mapper.UserMapper;
 import com.beigeoranges.ecms.Model.User;
+import com.beigeoranges.ecms.Model.UserForm;
+import com.beigeoranges.ecms.Utils.EncryptedPasswordUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
@@ -35,24 +37,40 @@ public class UserDao extends JdbcDaoSupport {
         }
     }
 
-    public void createUser(User user){
-        String sqlcreateuser ="INSERT INTO users (email, password, first_name, last_name, enabled) VALUE(?,?,?,?,?)";
-        String email = user.getUserName();
-        String password = user.getEncryptedPassword();
-        String first_name = user.getFirstName();
-        String last_name  = user.getLastName();
+    public int getMaxUserId(){
+        return getJdbcTemplate().queryForObject("SELECT MAX(user_id) FROM users", Integer.class);
+    }
 
-        getJdbcTemplate().update(sqlcreateuser,new Object[]{email,password,first_name,last_name,1});
+    public User createUser(UserForm form){
+        String encryptedPassword = EncryptedPasswordUtils.encryptPassword(form.getPassword());
+
+        String sqlcreateuser ="INSERT INTO users (email,typeofuser, first_name, last_name,encrypted_password, enabled) VALUE(?,?,?,?,?)";
+        String email = form.getEmail();
+        String password = encryptedPassword;
+        String first_name = form.getFirstName();
+        String last_name  = form.getLastName();
+
+
+        getJdbcTemplate().update(sqlcreateuser, email,1,first_name,last_name,password,1);
+        User user = new User(getMaxUserId(),email,password,first_name,last_name);
+
+        return user;
     }
 
     public List<User> getAllUsers(){
-        String sqlgetallusers = "SELECT * FROM users;";
+        String sqlgetallusers = "SELECT * FROM users";
 
         try {
             return getJdbcTemplate().query(sqlgetallusers, new UserMapper());
         } catch (Exception e) {
             return null;
         }
+    }
+
+
+    public User findUserByEmail(String email) {
+        User user = new User();
+        return user;
     }
 
 

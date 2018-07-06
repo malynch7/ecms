@@ -3,18 +3,29 @@ package com.beigeoranges.ecms.Controllers;
 
 import java.security.Principal;
 
+//import com.beigeoranges.ecms.Model.User;
+import com.beigeoranges.ecms.Dao.UserDao;
+import com.beigeoranges.ecms.Model.UserForm;
+import com.beigeoranges.ecms.Utils.RegistrationValidator;
 import com.beigeoranges.ecms.Utils.WebUtils;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class IndexController {
+
+    private UserDao UserDao;
+    private RegistrationValidator RegistrationValidator;
 
     @RequestMapping(value = { "/" }, method = RequestMethod.GET)
     public String welcomePage(Model model) {
@@ -87,6 +98,38 @@ public class IndexController {
             return "redirect:/admin/dashboard";
         }
         return "redirect:/player/dashboard";
+    }
+
+    @RequestMapping(value = "/registration", method = RequestMethod.GET)
+    public String viewRegister(Model model) {
+        UserForm form = new UserForm();
+        model.addAttribute("UserForm", form);
+
+        return "registration";
+    }
+
+    @RequestMapping(value = "/registration", method = RequestMethod.POST)
+    public String saveRegister(Model model,
+        @ModelAttribute("UserForm") @Validated UserForm UserForm, //
+        BindingResult result, //
+        final RedirectAttributes redirectAttributes) {
+
+            // Validate result
+            if (result.hasErrors()) {
+
+                return "registration";
+            }
+            com.beigeoranges.ecms.Model.User newUser= null;
+            try {
+                newUser = UserDao.createUser(UserForm);
+            }
+            // Other error!!
+            catch (Exception e) {
+                model.addAttribute("errorMessage", "Error: " + e.getMessage());
+                return "registration";
+            }
+
+            return "login";
     }
 
 }
