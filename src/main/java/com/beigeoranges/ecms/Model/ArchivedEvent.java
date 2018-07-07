@@ -1,25 +1,25 @@
 package com.beigeoranges.ecms.Model;
 
-public class Event {
+public class ArchivedEvent {
+
+    //getters and setters
     private int event_id;
     private String event_name;
     private String event_time;
     private String event_address;
     private int admin_id;
     // to be added
-    //private String handbook_file_path;
+    // private String handbook_file_path;
 
-    public Event() {
-    }
-
-    public Event(int event_id, String event_name, String event_time, String event_address, int admin_id) {
+    public ArchivedEvent(int event_id, String event_name, String event_time, String event_address, int admin_id){
         this.event_id = event_id;
         this.event_name = event_name;
         this.event_time = event_time;
         this.event_address = event_address;
         this.admin_id = admin_id;
         // add to constructor as well
-        //this.handbook_file_path= handbook_file_path;
+        //this.handbook_file_path = handbook_file_path;
+
     }
 
     public int getAdmin_id() {
@@ -61,4 +61,6 @@ public class Event {
     public void setEvent_address(String event_address) {
         this.event_address = event_address;
     }
+
+
 }
