@@ -1,10 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" style="border: 1px solid #ccc;padding:5px;margin-bottom:20px;">
 <head>
-    <meta charset="UTF-8">
-    <title>ECMS Dashboard</title>
+    <title>Admin</title>
+    <h1>Admin Dashboard</h1>
 </head>
-<body>
 
+<body>
+<table>
+    <tr>
+        <td><a th:href="@{/player/viewArchived}">View your past Events</a></td>
+    </tr>
+    <tr>
+        <td><a th:href="@{/player/viewEvents}">View Current Events</a></td>
+    </tr>
+    <tr>
+        <td><a th:href="@{/player/viewFlights}">View Flight Information</a></td>
+    </tr>
+    <tr>
+        <td><a th:href="@{/LogoutSuccessful}">Sign out</a></td>
+    </tr>
+</table>
 </body>
+
 </html>
+

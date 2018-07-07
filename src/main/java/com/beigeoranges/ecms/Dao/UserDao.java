@@ -91,4 +91,13 @@ public class UserDao extends JdbcDaoSupport {
         }
 
 
+    public int getUserIdByEmail(String username) {
+        int userid = 0;
+        String sqlgetemail = "SELECT user_id FROM users WHERE email = ?";
+
+        userid = getJdbcTemplate().queryForObject(sqlgetemail, new Object[] {username}, Integer.class);
+        System.out.println(getJdbcTemplate().queryForObject(sqlgetemail, new Object[] {username}, Integer.class));
+
+        return userid;
+    }
 }
