@@ -5,8 +5,7 @@
 
 
 <head>
-    <!--<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>-->
-    <link href="../static/css/login.css" th:href="@{/css/login.css}" rel="stylesheet" />
+    <link href="../static/css/login.css" th:href="@{css/login.css}" rel="stylesheet" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Login</title>
 </head>
@@ -16,7 +15,7 @@
 <!-- /login?error=true -->
 <div id="loginForm" align="center">
     <div th:if="${#request.getParameter('error') == 'true'}"
-         style="color:red;margin:10px 0px;">
+         style="color:white;margin:10px 0px;">
         Login Failed!!!<br />
         Reason :
         <span th:if="${#session!= null and #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}"
