@@ -7,6 +7,7 @@ import com.beigeoranges.ecms.Model.User;
 import org.springframework.jdbc.core.RowMapper;
 
 public class UserMapper implements RowMapper<User> {
+    //used to translate between the user table and user objects
 
     public static final String BASE_SQL //
             = "Select u.user_Id, u.email,u.first_name, u.last_name, u.encrypted_password From users u ";
