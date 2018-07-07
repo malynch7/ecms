@@ -45,7 +45,7 @@ public class IndexController {
     @RequestMapping(value = "/logoutSuccessful", method = RequestMethod.GET)
     public String logoutSuccessfulPage(Model model) {
         model.addAttribute("title", "Logout");
-        return "logoutSuccessfulPage";
+        return "logoutSuccessful";
     }
 
     @RequestMapping(value = {"/player", "player/**"}, method = RequestMethod.GET)
