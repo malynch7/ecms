@@ -27,7 +27,7 @@ public class EventController {
         Event event = new Event();
 
         String username = principal.getName();
-        event.setAdmin_id(userDao.getUserIdByEmail("username"));
+        event.setAdmin_id(userDao.getUserIdByEmail(username));
 
         model.addAttribute("event", event);
 
