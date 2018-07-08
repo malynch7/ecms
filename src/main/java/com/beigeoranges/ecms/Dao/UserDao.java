@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.ResultSet;
 import java.util.List;
 
 @Repository
@@ -93,10 +94,15 @@ public class UserDao extends JdbcDaoSupport {
 
     public int getUserIdByEmail(String username) {
         int userid = 0;
+        /*
         String sqlgetemail = "SELECT user_id FROM users WHERE email = ?";
+        //Object Ousername = username; // attempt to fix casting userid into Object[]
 
         userid = getJdbcTemplate().queryForObject(sqlgetemail, new Object[] {username}, Integer.class);
         System.out.println(getJdbcTemplate().queryForObject(sqlgetemail, new Object[] {username}, Integer.class));
+        */
+        String sqlgetemail2 = "SELECT user_id FROM users WHERE email = '"+username+"'";
+        userid = getJdbcTemplate().queryForObject(sqlgetemail2, Integer.class);
 
         return userid;
     }

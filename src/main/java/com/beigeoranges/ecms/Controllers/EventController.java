@@ -1,7 +1,9 @@
 package com.beigeoranges.ecms.Controllers;
 
+import com.beigeoranges.ecms.Dao.ArchivedEventDao;
 import com.beigeoranges.ecms.Dao.EventDao;
 import com.beigeoranges.ecms.Dao.UserDao;
+import com.beigeoranges.ecms.Model.ArchivedEvent;
 import com.beigeoranges.ecms.Model.Event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,12 +24,13 @@ public class EventController {
     @Autowired
     private UserDao userDao;
 
+
     @RequestMapping(value = "/admin/createEvent", method = RequestMethod.GET)
     public String viewCreateEventPage(Model model, Principal principal) {
         Event event = new Event();
 
         String username = principal.getName();
-        event.setAdmin_id(userDao.getUserIdByEmail("username"));
+        event.setAdmin_id(userDao.getUserIdByEmail(username));
 
         model.addAttribute("event", event);
 
@@ -51,4 +54,5 @@ public class EventController {
         }
         return "redirect:/admin/createEvent";
     }
+
 }

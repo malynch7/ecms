@@ -9,20 +9,22 @@ public class ArchivedEvent {
     private String event_address;
     private int admin_id;
     // to be added
-    // private String handbook_file_path;
+    //private String handbook_file_path;
 
-    public ArchivedEvent(int event_id, String event_name, String event_time, String event_address, int admin_id){
-        this.event_id = event_id;
-        this.event_name = event_name;
-        this.event_time = event_time;
-        this.event_address = event_address;
-        this.admin_id = admin_id;
+    public ArchivedEvent(){}
+
+    public ArchivedEvent(Event anEvent){
+        event_id = anEvent.getEvent_id();
+        event_name = anEvent.getEvent_name();
+        event_time = anEvent.getEvent_time();
+        event_address = anEvent.getEvent_time();
+        admin_id = anEvent.getAdmin_id();
         // add to constructor as well
         //this.handbook_file_path = handbook_file_path;
 
     }
 
-    public int getAdmin_id() {
+    /*public int getAdmin_id() {
         return admin_id;
     }
 
@@ -60,7 +62,7 @@ public class ArchivedEvent {
 
     public void setEvent_address(String event_address) {
         this.event_address = event_address;
-    }
+    }*/
 
 
 }
