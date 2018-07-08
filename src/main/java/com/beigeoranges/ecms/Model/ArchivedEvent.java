@@ -1,6 +1,20 @@
 package com.beigeoranges.ecms.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+
+@Entity
+@Table(name = "Events")
 public class ArchivedEvent {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@Column(name = "id") //not sure about this line
+    @JsonIgnore
+
+    @NotBlank(message = "Empty")
+    @Column(name = "Events", nullable = false)
 
     //getters and setters
     private int event_id;

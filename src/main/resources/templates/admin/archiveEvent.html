@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+
 <html xmlns:th="http://www.thymeleaf.org" style="border: 1px solid #ccc;padding:5px;margin-bottom:20px;">
 <head>
     <meta charset="UTF-8">
@@ -7,5 +7,28 @@
 </head>
 <body>
 
+<hl> Archive Events</hl>
+
+
+<form th:action="@{/admin/archiveEvent}" th:object = "${event}" method="POST">
+
+    <div class="form-group blu-margin">
+
+        <select class="form-control" th:field="${Events}"  name="dropEvents">
+            <option value="">Select Events</option>
+            <option th:each="Event : ${eventList}" th:value="${}" th:text=""></option>
+        </select>
+
+    </div>
+
+
+
+</form>
+
+
+
+
+
 </body>
 </html>
+

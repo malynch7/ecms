@@ -1,11 +1,14 @@
 package com.beigeoranges.ecms.Model;
 
+import java.util.List;
+
 public class Event {
     private int event_id;
     private String event_name;
     private String event_time;
     private String event_address;
     private int admin_id;
+
     // to be added
     //private String handbook_file_path;
 
@@ -61,4 +64,6 @@ public class Event {
     public void setEvent_address(String event_address) {
         this.event_address = event_address;
     }
+
+
 }
