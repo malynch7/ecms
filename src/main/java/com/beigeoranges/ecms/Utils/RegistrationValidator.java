@@ -46,13 +46,13 @@ public class RegistrationValidator implements Validator {
             // Invalid admin code.
             errors.rejectValue("adminCode", "Pattern.UserForm.adminCode");
 
-        }
-        int userId = userDao.getUserIdByEmail(userForm.getEmail());
-        if (userId != 0) {
-            // Email has been used by another account.
-            errors.rejectValue("email", "Duplicate.UserForm.email");
-        }
-        if (!errors.hasErrors()) {
+        }else if (userForm.getUserId() == null) {
+            User dbUser = userDao.findUserAccount(userForm.getEmail());
+            if (dbUser != null) {
+                // Email has been used by another account.
+                errors.rejectValue("email", "Duplicate.UserForm.email");
+            }
+        }if (!errors.hasErrors()) {
             if (!userForm.getConfirmPassword().equals(userForm.getPassword())) {
                 errors.rejectValue("confirmPassword", "Match.UserForm.confirmPassword");
             }
