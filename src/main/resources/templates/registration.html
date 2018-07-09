@@ -1,12 +1,14 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title> Register </title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link href="../static/css/login.css" th:href="@{css/login.css}" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title> Registration </title>
     <style>
-        th, td {
-            padding: 5px;
-        }
-        td span  {
+        span  {
             font-size:90%;
             font-style: italic;
             color: red;
@@ -18,69 +20,59 @@
     </style>
 </head>
 <body>
+    <div class="container">
+        <div class="card card-container-lg">
+            <h2 align="center">Registration</h2>
+            <br>
+            <div th:if="${errorMessage != null}"
+             th:utext="${errorMessage}" class="error">...</div>
+            <form th:action="@{/registration}" th:object="${userForm}" method='POST'>
+                <div class="form-group">
+                    <label for="InputEmail">Email address <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">..</span></label>
+                    <input type="text" id="inputEmail" class="form-control" th:field="*{email}" />
 
-<h2>Register</h2>
+                </div>
+                <div class="form-group">
+                    <label for="InputFirstName">First name <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">..</span></label>
+                    <input type="text" id="inputFirstName" class="form-control" th:field="*{firstName}" />
 
-<div th:if="${errorMessage != null}"
-     th:utext="${errorMessage}" class="error">...</div>
+                </div>
+                <div class="form-group">
+                    <label for="InputLastName">Last name <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">..</span></label>
+                    <input type="text" id="inputLastName" class="form-control" th:field="*{lastName}" />
 
-<form th:action="@{/registration}" th:object="${userForm}" method="POST">
-    <table>
+                </div>
+                <div class="form-group">
+                    <label for="InputPassword">Password <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}">..</span></label>
+                    <input type="text" id="inputPassword" class="form-control" th:field="*{password}" />
 
-        <tr>
-            <td>Password</td>
-            <td><input type="password" th:field="*{password}" /> </td>
-            <td>
-                <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}">..</span>
-            </td>
-        </tr>
-        <tr>
-            <td>Confirm</td>
-            <td><input type="password" th:field="*{confirmPassword}" /> </td>
-            <td>
-                <span th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}">..</span>
-            </td>
-        </tr>
-        <tr>
-            <td>Email</td>
-            <td><input type="text" th:field="*{email}" /> </td>
-            <td>
-                <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">..</span>
-            </td>
-        </tr>
-        <tr>
-            <td>First Name</td>
-            <td><input type="text" th:field="*{firstName}" /> </td>
-            <td>
-                <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">..</span>
-            </td>
-        </tr>
-        <tr>
-            <td>Last Name</td>
-            <td><input type="text" th:field="*{lastName}" /> </td>
-            <td>
-                <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">..</span>
-            </td>
-        </tr>
-        <tr>
-        <tr>
-            <td>Admin Code</td>
-            <td><input type="text" placeholder="Leave blank if not admin" th:field="*{adminCode}" /> </td>
-            <td>
-                <span th:if="${#fields.hasErrors('adminCode')}" th:errors="*{adminCode}">..</span>
-            </td>
-        </tr>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
-            <td>
-                <input type="submit" value="Submit" />
-                <a th:href="@{/}">Cancel</a>
-            </td>
-            <td>&nbsp;</td>
-        </tr>
-    </table>
-</form>
+                </div>
+                <div class="form-group">
+                    <label for="InputConfirmPassword">Confirm password <span th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}">..</span></label>
+                    <input type="text" id="inputConfirmPassword" class="form-control" th:field="*{confirmPassword}" />
+
+                </div>
+                <div class="form-group">
+                    <label for="InputAdminCode">Admin code <span th:if="${#fields.hasErrors('adminCode')}" th:errors="*{adminCode}">..</span></label>
+                    <input type="text" id="inputAdminCode" placeholder="Leave blank if not admin" class="form-control" th:field="*{adminCode}" />
+
+                </div>
+                <div>
+                    <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Submit</button>
+                </div>
+                <div class="center-pill">
+                    <a th:href="@{/}">Cancel</a>
+                </div>
+            </form><!-- /form -->
+        </div>
+    </div>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
 
 </body>
+
 </html>

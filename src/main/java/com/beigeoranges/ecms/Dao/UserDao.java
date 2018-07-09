@@ -83,11 +83,10 @@ public class UserDao extends JdbcDaoSupport {
 
 
     public User findUserByEmail(String email) {
-        User user = new User();
         String sqlgetuserbyemail = "SELECT * FROM users WHERE email ='"+email+"'";
-//        if(getJdbcTemplate().queryForObject(sqlgetuserbyemail, String.class) != null){
-//            return user;
-//        }
+        if(getJdbcTemplate().queryForObject(sqlgetuserbyemail,new Object[] {email}, String.class) != ""){
+           return new User();
+       }
             return null;
         }
 
