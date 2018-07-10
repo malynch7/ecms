@@ -9,7 +9,8 @@
 
 <h1>Create Event</h1>
 
-
+<div th:if="${errorMessage != null}"
+     th:utext="${errorMessage}" class="error">...</div>
 <form th:action="@{/admin/createEvent}" th:object="${event}" method="POST">
     <table>
 

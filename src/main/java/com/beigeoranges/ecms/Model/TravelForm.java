@@ -3,7 +3,7 @@ package com.beigeoranges.ecms.Model;
 public class TravelForm{
 
 
-    private long userId;
+    private int userId;
     private int eventId;
     private String airline;
     private String departureTime;
@@ -16,7 +16,7 @@ public class TravelForm{
 
     }
 
-    public TravelForm(long userId, int eventId, String airline,String departureTime,String arrivalTime, String arrivalTerminal,String departureTerminal, String confirmationCode){
+    public TravelForm(int userId, int eventId, String airline,String departureTime,String arrivalTime, String arrivalTerminal,String departureTerminal, String confirmationCode){
 
         this.userId = userId;
         this.eventId = eventId;
@@ -28,11 +28,19 @@ public class TravelForm{
         this.confirmationCode = confirmationCode;
     }
 
-    public long getUserId() {
+    public String getConfirmationCode() {
+        return confirmationCode;
+    }
+
+    public void setConfirmationCode(String confirmationCode) {
+        this.confirmationCode = confirmationCode;
+    }
+
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(long userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
