@@ -24,6 +24,6 @@ public class TravelMapper implements RowMapper<TravelForm> {
         String confirmationCode = rs.getString("flight_confirmation");
 
 
-        return new TravelForm((long) userId, eventId, airline, departureTime, arrivalTime, arrivalTerminal, departureTerminal, confirmationCode);
+        return new TravelForm(userId, eventId, airline, departureTime, arrivalTime, arrivalTerminal, departureTerminal, confirmationCode);
     }
 }
