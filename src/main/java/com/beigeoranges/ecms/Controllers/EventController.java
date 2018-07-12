@@ -5,16 +5,18 @@ import com.beigeoranges.ecms.Dao.EventDao;
 import com.beigeoranges.ecms.Dao.UserDao;
 import com.beigeoranges.ecms.Model.ArchivedEvent;
 import com.beigeoranges.ecms.Model.Event;
+import com.beigeoranges.ecms.Model.User;
+import com.beigeoranges.ecms.Utils.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 public class EventController {
@@ -59,8 +61,13 @@ public class EventController {
         return "redirect:/admin/dashboard";
     }
 
-    @RequestMapping(value = "/admin/EventSelected", method = RequestMethod.GET)
-    public String viewEventSelected(Model model) {
+    @RequestMapping(value = "/admin/EventSelected?id={eventid}", method = RequestMethod.GET)
+    public @ResponseBody String viewEventSelected(@PathVariable(value="eventid") String eventid, Model model) {
+
+
+        List<User> userList = userDao.getAllUsers();
+
+        model.addAttribute("player", userList);
 
 
         return "admin/EventSelected";

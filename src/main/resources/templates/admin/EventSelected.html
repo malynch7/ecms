@@ -8,12 +8,17 @@
 <body>
 <table>
     <tr>
-        <th>Invited</th>
         <th>Confirmed</th>
+        <th>Invited</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+
     </tr>
-    <tr th:text="eventid = ${#httpServletRequest.getParameter('id')}">
-        <td></td>
-        <td></td>
+    <tr th:each="player : ${players}">
+        <td th:text="${player.user_Id}"></td>
+        <td th:text="${player.email}"></td>
+        <td th:text="${player.first_name}"></td>
+        <td th:text="${player.last_name}"></td>
 
     </tr>
 </table>

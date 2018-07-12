@@ -32,7 +32,7 @@ public class IndexController {
         return "index";
     }
 
-    @RequestMapping(value = {"/admin", "/admin/**"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/admin", "/admin/dashboard"}, method = RequestMethod.GET)
     public String adminPage(Model model, Principal principal) {
 
         User loginedUser = (User) ((Authentication) principal).getPrincipal();

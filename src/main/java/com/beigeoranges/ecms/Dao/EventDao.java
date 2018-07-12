@@ -44,7 +44,7 @@ public class EventDao extends JdbcDaoSupport {
         eventList = jdbcTemplate.queryForList(sqlAllEvents, String.class);
         return eventList;
     }
-    
+
     public List<Event> getAllEvents(){
         String sqlGetAllEvents = "SELECT * FROM events";
 
