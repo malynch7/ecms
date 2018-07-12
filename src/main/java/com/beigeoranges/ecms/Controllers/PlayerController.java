@@ -9,8 +9,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+
 import java.security.Principal;
 import java.util.List;
 
@@ -49,5 +49,13 @@ public class PlayerController {
 
 
         return "player/dashboard";
+    }
+
+    @RequestMapping(value = "/player/viewEvent", method = RequestMethod.POST)
+    public String viewEventSelected(@ModelAttribute(value="invitedEvent") Event event, Model model) {
+
+        model.addAttribute("event", event);
+
+        return "player/viewEvent";
     }
 }
