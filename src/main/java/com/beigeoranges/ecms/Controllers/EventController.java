@@ -29,10 +29,6 @@ public class EventController {
     public String viewCreateEventPage(Model model, Principal principal) {
         Event event = new Event();
 
-//        String username = principal.getName();
-//        event.setAdmin_id(userDao.getUserIdByEmail(username));
-        //System.out.println(event.getAdmin_id());
-
         model.addAttribute("event", event);
 
         return "admin/createEvent";
@@ -43,24 +39,31 @@ public class EventController {
 
         // Validate result
         if (result.hasErrors()) {
-            System.out.println("Error in if");
+       //     System.out.println("Error in if");
             return "admin/createEvent";
         }
         try {
             String username = principal.getName();
             event.setAdmin_id(userDao.getUserIdByEmail(username));
             eventDao.createEvent(event);
-            System.out.println("try");
+         //   System.out.println("try");
 
         }
         // Other error!!
         catch (Exception e) {
             model.addAttribute("errorMessage", "Error: " + e.getMessage());
-            System.out.println("Error in catch");
+        //    System.out.println("Error in catch");
 
             return "admin/createEvent";
         }
         return "redirect:/admin/dashboard";
+    }
+
+    @RequestMapping(value = "/admin/EventSelected", method = RequestMethod.GET)
+    public String viewEventSelected(Model model) {
+
+
+        return "admin/EventSelected";
     }
 
 }

@@ -2,9 +2,7 @@ package com.beigeoranges.ecms.Dao;
 
 import com.beigeoranges.ecms.Mapper.EventMapper;
 import com.beigeoranges.ecms.Model.Event;
-import com.beigeoranges.ecms.Model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
@@ -13,9 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
-
-
-//private static List<String> eventList;
 
 @Repository
 @Transactional
@@ -42,14 +37,15 @@ public class EventDao extends JdbcDaoSupport {
         getJdbcTemplate().update(sqlCreateEvent, eventName, eventTime, eventAddress, adminId);
 
     }
-    // The below method creates a list of all the events to be used in a dropdown menu
-    public static List<String> curEvents(){
-        String sqlAllEvents = "SELECT event_name FROM events";
+    public List<Event> getAllEvents(){
+        String sqlGetAllEvents = "SELECT * FROM events";
 
-        eventList = jdbcTemplate.queryForList(sqlAllEvents, String.class);
-        return eventList;
+        try {
+            return getJdbcTemplate().query(sqlGetAllEvents, new EventMapper());
+        } catch (Exception e) {
+            return null;
+        }
     }
-
     public List<Event> getInvitedEvents(int userId){
 
 
@@ -88,4 +84,5 @@ public class EventDao extends JdbcDaoSupport {
         System.out.println(confirmedEvents.toString());
         return confirmedEvents;
     }
+}
 }

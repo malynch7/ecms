@@ -8,6 +8,26 @@
 <body>
 <table>
     <tr>
+        <th>Event Name</th>
+        <th>Event Time</th>
+        <th>Event Address</th>
+        <th>Admin ID</th>
+
+    </tr>
+    <tr th:each="event : ${events}">
+        <td th:text="${event.event_name}"></td>
+        <td th:text="${event.event_time}"></td>
+        <td th:text="${event.event_address}"></td>
+        <td th:text="${event.admin_id}"></td>
+        <td>
+            <a th:href="@{/admin/EventSelected(id=${event.event_id})}">View</a>
+        </td>
+    </tr>
+</table>
+
+<table>
+
+    <tr>
         <td><a th:href="@{/admin/createEvent}">Create Event</a></td>
     </tr>
     <tr>

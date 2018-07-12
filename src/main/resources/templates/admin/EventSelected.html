@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" style="border: 1px solid #ccc;padding:5px;margin-bottom:20px;">
+<head>
+    <title>Event Information</title>
+    <h1>(event name)</h1>
+</head>
+
+<body>
+<table>
+    <tr>
+        <th>Invited</th>
+        <th>Confirmed</th>
+    </tr>
+    <tr th:text="eventid = ${#httpServletRequest.getParameter('id')}">
+        <td></td>
+        <td></td>
+
+    </tr>
+</table>
+</body>
+
+</html>
+
