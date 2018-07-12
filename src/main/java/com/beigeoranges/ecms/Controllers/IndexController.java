@@ -48,21 +48,6 @@ public class IndexController {
         return "logoutSuccessful";
     }
 
-    @RequestMapping(value = {"/player", "player/**"}, method = RequestMethod.GET)
-    public String userInfo(Model model, Principal principal) {
-
-        // After user login successfully.
-        String userName = principal.getName();
-
-        System.out.println("User Name: " + userName);
-
-        User loginedUser = (User) ((Authentication) principal).getPrincipal();
-
-        String userInfo = WebUtils.toString(loginedUser);
-        model.addAttribute("userInfo", userInfo);
-
-        return "player/dashboard";
-    }
 
     @RequestMapping(value = "/error/access-denied", method = RequestMethod.GET)
     public String accessDenied(Model model, Principal principal) {

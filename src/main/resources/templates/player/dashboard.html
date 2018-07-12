@@ -6,6 +6,38 @@
 </head>
 
 <body>
+<br><br>
+
+<table>
+    <tr>
+        <td><h1>Invited Events</h1></td>
+    </tr>
+    <tr>
+        <td th:if="${isInvitedEmpty}">You have not been invited to any events</td>
+    </tr>
+    <th:block th:each="invitedEvent : ${invitedEvents}">
+        <tr>
+            <td th:text="${invitedEvent.getEvent_name()}">...</td>
+        </tr>
+    </th:block>
+</table>
+<br><br>
+<table>
+    <tr>
+        <td><h1>Confirmed Events</h1></td>
+    </tr>
+    <tr>
+        <td th:if="${isConfirmedEmpty}">You have not confirmed any events</td>
+    </tr>
+    <th:block th:each="confirmedEvent : ${confirmedEvents}">
+        <tr>
+            <td th:text="${confirmedEvent.getEvent_name()}">...</td>
+        </tr>
+    </th:block>
+</table>
+
+<br><br>
+
 <table>
     <tr>
         <td><a th:href="@{/player/viewArchived}">View your past Events</a></td>
