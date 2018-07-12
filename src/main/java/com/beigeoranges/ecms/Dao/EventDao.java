@@ -37,6 +37,14 @@ public class EventDao extends JdbcDaoSupport {
         getJdbcTemplate().update(sqlCreateEvent, eventName, eventTime, eventAddress, adminId);
 
     }
+    // The below method creates a list of all the events to be used in a dropdown menu
+    public static List<String> curEvents(){
+        String sqlAllEvents = "SELECT event_name FROM events";
+
+        eventList = jdbcTemplate.queryForList(sqlAllEvents, String.class);
+        return eventList;
+    }
+    
     public List<Event> getAllEvents(){
         String sqlGetAllEvents = "SELECT * FROM events";
 
@@ -85,4 +93,4 @@ public class EventDao extends JdbcDaoSupport {
         return confirmedEvents;
     }
 }
-}
+
