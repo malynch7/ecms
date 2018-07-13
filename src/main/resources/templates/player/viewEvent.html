@@ -1,12 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" style="border: 1px solid #ccc;padding:5px;margin-bottom:20px;">
 <head>
     <meta charset="UTF-8">
     <title>View Event</title>
 </head>
 <body>
 
-<h1>${event}</h1>
+<h1 th:text="${event.getEvent_name()}">...</h1>
+
+<p th:text="${event.getEvent_id()}">...</p>
+
+
 
 </body>
 </html>

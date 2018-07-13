@@ -52,7 +52,9 @@ public class PlayerController {
     }
 
     @RequestMapping(value = "/player/viewEvent", method = RequestMethod.POST)
-    public String viewEventSelected(@ModelAttribute(value="invitedEvent") Event event, Model model) {
+    public String viewEvent(@RequestParam("invitedEvent") Event event, Model model) {
+
+        System.out.println(event.getEvent_name());
 
         model.addAttribute("event", event);
 

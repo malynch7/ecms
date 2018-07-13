@@ -23,7 +23,7 @@
         <tr>
             <td th:text="${invitedEvent.getEvent_name()}">...</td>
             <td>
-                <form th:action="@{/player/viewEvent}" th:object="${invitedEvent}" method="post">
+                <form th:action="@{/player/viewEvent}" th:value="${invitedEvent}" th:name="invitedEvents" method="post">
                     <button type="submit" class="btn btn-link">View</button>
                 </form>
             </td>
