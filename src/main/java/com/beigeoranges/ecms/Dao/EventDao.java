@@ -92,5 +92,21 @@ public class EventDao extends JdbcDaoSupport {
         System.out.println(confirmedEvents.toString());
         return confirmedEvents;
     }
+
+    public Boolean isInvited(int eventId, int userId){
+        String sqlCheckInvited = "SELECT count(*) FROM registered_to WHERE event_id = '" + eventId  + "' AND user_id = '" + userId + "'AND RSVP = 0";
+        try{
+            Integer count = getJdbcTemplate().queryForObject(sqlCheckInvited, Integer.class);
+            //System.out.println(count);
+            return count!=null && count > 0;
+        }catch(Exception e) {
+            return false;
+        }
+
+    }
+
+    public void InvitePlayer(int eventId, int userId){
+
+    }
 }
 

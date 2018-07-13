@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class EventController {
     }
 
     @RequestMapping(value = "/admin/createEvent", method = RequestMethod.POST)
-    public String saveEvent(Model model, Principal principal, @ModelAttribute(value="event") Event event, BindingResult result, final RedirectAttributes redirectAttributes) {
+    public String saveEvent(Model model, Principal principal, @ModelAttribute(value="event") Event event, BindingResult result) {
 
         // Validate result
         if (result.hasErrors()) {
@@ -61,16 +62,28 @@ public class EventController {
         return "redirect:/admin/dashboard";
     }
 
-    @RequestMapping(value = "/admin/EventSelected?id={eventid}", method = RequestMethod.GET)
-    public @ResponseBody String viewEventSelected(@PathVariable(value="eventid") String eventid, Model model) {
+    @RequestMapping(value = "/admin/EventSelected", method = RequestMethod.GET)
+    public String viewEventSelected(@RequestParam("id") String eventid, Model model) {
 
+        List<User> UninvitedList = userDao.getUninvitedUsers(Integer.parseInt(eventid));
+        model.addAttribute("Uninvited", UninvitedList);
 
-        List<User> userList = userDao.getAllUsers();
+        List<User> InvitedList = userDao.getInvitedUsers(Integer.parseInt(eventid));
+        model.addAttribute("Invited", InvitedList);
 
-        model.addAttribute("player", userList);
-
+        List<User> RSVPList = userDao.getRSVPUsers(Integer.parseInt(eventid));
+        model.addAttribute("RSVPd", RSVPList);
 
         return "admin/EventSelected";
     }
 
-}
+    @RequestMapping(value = "/admin/EventSelected", method = RequestMethod.POST)
+    public String InvitePlayer(@RequestParam("id") String eventid, Model model, @RequestAttribute("Uninvited") User player) {
+
+        eventDao.InvitePlayer(Integer.parseInt(eventid), Math.toIntExact(player.getUserId()));
+
+        return "redirect:/admin/EventSelected";
+    }
+
+
+    }
