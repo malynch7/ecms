@@ -80,7 +80,6 @@ public class EventController {
     @RequestMapping(value = "/admin/EventSelected", method = RequestMethod.POST)
     public String InvitePlayer(@RequestParam("id") String eventid, Model model, @RequestAttribute("Uninvited") User player) {
 
-        eventDao.InvitePlayer(Integer.parseInt(eventid), Math.toIntExact(player.getUserId()));
 
         return "redirect:/admin/EventSelected";
     }
