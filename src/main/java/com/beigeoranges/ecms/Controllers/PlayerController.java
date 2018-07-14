@@ -112,7 +112,7 @@ public class PlayerController {
 
         model.addAttribute("event",event);
 
-        return "redirect:/player/viewEvent";
+        return "redirect:/player/dashboard";
     }
 
     @RequestMapping(value = "/player/viewTravelInfo", method = RequestMethod.POST)
