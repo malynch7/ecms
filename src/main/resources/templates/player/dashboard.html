@@ -38,6 +38,7 @@
                             <input type="hidden" th:value="*{event_time}" name="event_time" />
                             <input type="hidden" th:value="*{event_address}" name="event_address" />
                             <input type="hidden" th:value="*{admin_id}" name="admin_id" />
+                            <input type="hidden" th:value="*{event_date}" name="event_date" />
                             <button type="submit" class="btn btn-link" th:text="${confirmedEvent.getEvent_name()}"></button>
                         </form>
                     </li>
@@ -56,6 +57,7 @@
                             <input type="hidden" th:value="*{event_time}" name="event_time" />
                             <input type="hidden" th:value="*{event_address}" name="event_address" />
                             <input type="hidden" th:value="*{admin_id}" name="admin_id" />
+                            <input type="hidden" th:value="*{event_date}" name="event_date" />
                             <button type="submit" class="btn btn-link" th:text="${invitedEvent.getEvent_name()}"></button>
                         </form>
                     </li>

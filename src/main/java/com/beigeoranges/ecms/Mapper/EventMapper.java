@@ -9,7 +9,7 @@ import java.sql.SQLException;
 public class EventMapper implements RowMapper<Event> {
 
     public static final String BASE_SQL //
-        = "Select e.event_id, e.event_name, e.event_time, e.event_address, e.admin_id, e.handbook_file_path FROM events e";
+        = "Select e.event_id, e.event_name, e.event_time, e.event_address, e.admin_id, e.handbook_file_path, e.event_date FROM events e";
 
     @Override
     public Event mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -19,8 +19,9 @@ public class EventMapper implements RowMapper<Event> {
         String event_address = rs.getString("event_address");
         int admin_id  = rs.getInt("admin_id");
         String handbook_file_path = rs.getString("handbook_file_path");
+        String event_date  = rs.getString("event_date");
 
-        Event aEvent = new Event(event_id, event_name, event_time, event_address, admin_id);
+        Event aEvent = new Event(event_id, event_name, event_time, event_address, admin_id,event_date);
         return aEvent;
     }
 }

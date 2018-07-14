@@ -32,6 +32,10 @@
                     <li class="list-group-item">
                         <table class="table-sm" >
                             <tr>
+                                <td>Date:</td>
+                                <td th:text="${event.getEvent_date()}"></td>
+                            </tr>
+                            <tr>
                                 <td>Time:</td>
                                 <td th:text="${event.getEvent_time()}"></td>
                             </tr>
@@ -51,6 +55,7 @@
                     <input type="hidden" th:value="*{event_time}" name="event_time" />
                     <input type="hidden" th:value="*{event_address}" name="event_address" />
                     <input type="hidden" th:value="*{admin_id}" name="admin_id" />
+                    <input type="hidden" th:value="*{event_date}" name="event_date" />
                     <button type="submit" class="btn btn-primary">View Travel Information</button>
                 </form>
                 <form th:if="${!confirmed}" th:align="center" th:action="@{/player/confirm}" th:object="${event}" method="post">
@@ -59,6 +64,7 @@
                     <input type="hidden" th:value="*{event_time}" name="event_time" />
                     <input type="hidden" th:value="*{event_address}" name="event_address" />
                     <input type="hidden" th:value="*{admin_id}" name="admin_id" />
+                    <input type="hidden" th:value="*{event_date}" name="event_date" />
                     <button type="submit" class="btn btn-primary">Confirm Attendance</button>
                 </form>
             </div>

@@ -28,13 +28,14 @@ public class EventDao extends JdbcDaoSupport {
 
     public void createEvent(Event form){
 
-        String sqlCreateEvent ="INSERT INTO Events (event_name, event_time, event_address, admin_id) VALUE(?,?,?,?)";
+        String sqlCreateEvent ="INSERT INTO Events (event_name, event_time, event_address, admin_id,event_date) VALUE(?,?,?,?,?)";
         String eventName = form.getEvent_name();
         String eventTime = form.getEvent_time();
         String eventAddress = form.getEvent_address();
         int adminId  = form.getAdmin_id();
+        String eventDate = form.getEvent_date();
 
-        getJdbcTemplate().update(sqlCreateEvent, eventName, eventTime, eventAddress, adminId);
+        getJdbcTemplate().update(sqlCreateEvent, eventName, eventTime, eventAddress, adminId, eventDate);
 
     }
     // The below method creates a list of all the events to be used in a dropdown menu
