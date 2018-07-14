@@ -1,7 +1,10 @@
 package com.beigeoranges.ecms.Dao;
 
+import com.beigeoranges.ecms.Mapper.TravelMapper;
 import com.beigeoranges.ecms.Model.TravelForm;
+import com.beigeoranges.ecms.Model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
@@ -36,6 +39,16 @@ public class TravelDao extends JdbcDaoSupport {
 
         getJdbcTemplate().update(sqlCreateFlight, flightAirline, flightDepart, flightArrival, arrivalTerminal, flightConfirmation, userId, eventId, departureTerminal);
 
+    }
+    public TravelForm getTravelInfo(int eventid, int userid){
+
+        String sql = "Select * From travel_information WHERE event_id = ? AND user_id = ?";
+        try {
+            TravelForm travelForm = this.getJdbcTemplate().queryForObject(sql, new Object[] { eventid, userid } , new TravelMapper());
+            return travelForm;
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
 }

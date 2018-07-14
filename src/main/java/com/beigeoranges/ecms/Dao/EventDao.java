@@ -28,13 +28,14 @@ public class EventDao extends JdbcDaoSupport {
 
     public void createEvent(Event form){
 
-        String sqlCreateEvent ="INSERT INTO Events (event_name, event_time, event_address, admin_id) VALUE(?,?,?,?)";
+        String sqlCreateEvent ="INSERT INTO Events (event_name, event_time, event_address, admin_id,event_date) VALUE(?,?,?,?,?)";
         String eventName = form.getEvent_name();
         String eventTime = form.getEvent_time();
         String eventAddress = form.getEvent_address();
         int adminId  = form.getAdmin_id();
+        String eventDate = form.getEvent_date();
 
-        getJdbcTemplate().update(sqlCreateEvent, eventName, eventTime, eventAddress, adminId);
+        getJdbcTemplate().update(sqlCreateEvent, eventName, eventTime, eventAddress, adminId, eventDate);
 
     }
     // The below method creates a list of all the events to be used in a dropdown menu
@@ -93,20 +94,9 @@ public class EventDao extends JdbcDaoSupport {
         return confirmedEvents;
     }
 
-    public Boolean isInvited(int eventId, int userId){
-        String sqlCheckInvited = "SELECT count(*) FROM registered_to WHERE event_id = '" + eventId  + "' AND user_id = '" + userId + "'AND RSVP = 0";
-        try{
-            Integer count = getJdbcTemplate().queryForObject(sqlCheckInvited, Integer.class);
-            //System.out.println(count);
-            return count!=null && count > 0;
-        }catch(Exception e) {
-            return false;
-        }
-
-    }
-
-    public void InvitePlayer(int eventId, int userId){
-
+    public void RSVP(int eventId, int userId){
+        String sql = "UPDATE registered_to SET RSVP = 1 WHERE event_id = ? AND user_id = ?";
+        getJdbcTemplate().update(sql, new Object[] {eventId, userId});
     }
 }
 
