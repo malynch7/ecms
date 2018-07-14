@@ -29,7 +29,7 @@ public class EventController {
 
 
     @RequestMapping(value = "/admin/createEvent", method = RequestMethod.GET)
-    public String viewCreateEventPage(Model model, Principal principal) {
+    public String viewCreateEventPage(Model model) {
         Event event = new Event();
 
         model.addAttribute("event", event);
