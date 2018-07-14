@@ -8,7 +8,11 @@ import org.springframework.security.core.userdetails.User;
 
     public class WebUtils {
 
+
+
         public static String toString(User user) {
+            //used to pass credentials to spring security core for user authorization
+
             StringBuilder sb = new StringBuilder();
 
             sb.append("UserName:").append(user.getUsername());

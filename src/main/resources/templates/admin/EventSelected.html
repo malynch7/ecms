@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" style="border: 1px solid #ccc;padding:5px;margin-bottom:20px;">
+<head>
+    <title>Event Information</title>
+    <h1>(event name)</h1>
+</head>
+
+<body>
+<table>
+    <tr>
+        <th>Confirmed</th>
+        <th>Invited</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+
+    </tr>
+    <tr th:each="player : ${players}">
+        <td th:text="${player.user_Id}"></td>
+        <td th:text="${player.email}"></td>
+        <td th:text="${player.first_name}"></td>
+        <td th:text="${player.last_name}"></td>
+
+    </tr>
+</table>
+</body>
+
+</html>
+

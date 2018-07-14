@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" style="border: 1px solid #ccc;padding:5px;margin-bottom:20px;">
+<head>
+    <title>Create Event</title>
+
+</head>
+
+<body>
+
+<h1>Create Event</h1>
+
+<div th:if="${errorMessage != null}"
+     th:utext="${errorMessage}" class="error">...</div>
+<form th:action="@{/admin/createEvent}" th:object="${event}" method="POST">
+    <table>
+
+        <tr>
+            <td>Event Name</td>
+            <td><input type="text" th:field="*{event_name}" /> </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td>Event Time</td>
+            <td><input type="text" th:field="*{event_time}" /> </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td>Event Address</td>
+            <td><input type="text" th:field="*{event_address}" /> </td>
+            <td>
+            </td>
+        </tr>
+
+        <tr>
+
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>
+                <input type="submit" value="Submit" />
+                <a th:href="@{/}">Cancel</a>
+            </td>
+            <td>&nbsp;</td>
+        </tr>
+    </table>
+</form>
+
+</body>
+
+</html>
+

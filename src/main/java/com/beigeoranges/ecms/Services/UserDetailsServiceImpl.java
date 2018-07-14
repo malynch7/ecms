@@ -34,19 +34,19 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         System.out.println("Found User: " + User);
 
-        // [ROLE_USER, ROLE_ADMIN,..]
+        // Grant authority and assign ROLE_PLAYER or ROLE_ADMIN
         List<String> roleNames = this.roleDao.getRoleNames(User.getUserId());
 
         List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();
         if (roleNames != null) {
             for (String role : roleNames) {
-                // ROLE_USER, ROLE_ADMIN,..
+                // ROLE_PLAYER, ROLE_ADMIN,..
                 GrantedAuthority authority = new SimpleGrantedAuthority(role);
                 grantList.add(authority);
             }
         }
 
-        UserDetails userDetails = (UserDetails) new org.springframework.security.core.userdetails.User(User.getUserName(),User.getEncryptedPassword(), grantList);
+        UserDetails userDetails = (UserDetails) new org.springframework.security.core.userdetails.User(User.getEmail(),User.getEncryptedPassword(), grantList);
         return userDetails;
     }
 

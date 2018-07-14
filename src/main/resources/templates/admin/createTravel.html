@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" style="border: 1px solid #ccc;padding:5px;margin-bottom:20px;">
+<head>
+    <title>Create Event</title>
+
+</head>
+
+<body>
+
+<h1>Create Event</h1>
+
+
+<form th:action="@{/admin/createTravel}" th:object="${travel}" method="POST">
+    <table>
+
+        <tr>
+            <td>Flight Airline</td>
+            <td><input type="text" th:field="*{flight_airline}" /> </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td>Flight Departure</td>
+            <td><input type="text" th:field="*{flight_depart}" /> </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td>Flight Arrival</td>
+            <td><input type="text" th:field="*{flight_arrival}" /> </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td>Arrival Terminal</td>
+            <td><input type="text" th:field="*{arrival_terminal}" /> </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td>Flight Confirmation</td>
+            <td><input type="text" th:field="*{flight_confirmationl}" /> </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td>Departure Terminal</td>
+            <td><input type="text" th:field="*{departure_terminal}" /> </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td>User E-mail</td>
+            <td><input type="text" th:field="*{flight_arrival}" /> </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td>Event Name</td>
+            <td><input type="text" th:field="*{flight_arrival}" /> </td>
+            <td>
+            </td>
+        </tr>
+
+        <tr>
+
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>
+                <input type="submit" value="Submit" />
+                <a th:href="@{/}">Cancel</a>
+            </td>
+            <td>&nbsp;</td>
+        </tr>
+    </table>
+</form>
+
+</body>
+
+</html>
+

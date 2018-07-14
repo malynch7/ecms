@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
             this.setDataSource(dataSource);
         }
 
-        public List<String> getRoleNames(int userId) {
+        public List<String> getRoleNames(Long userId) {
             String sql = "Select r.role " //
                     + " from user_role ur, role r " //
                     + " where ur.role_Id = r.role_Id and ur.user_Id = ? ";

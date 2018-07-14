@@ -1,10 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" style="border: 1px solid #ccc;padding:5px;margin-bottom:20px;">
 <head>
-    <meta charset="UTF-8">
-    <title>ECMS Dashboard</title>
+    <title>ECMS Admin Dashboard</title>
+    <h1>Admin Dashboard</h1>
 </head>
-<body>
 
+<body>
+<table>
+    <tr>
+        <th>Event Name</th>
+        <th>Event Time</th>
+        <th>Event Address</th>
+        <th>Admin ID</th>
+
+    </tr>
+    <tr th:each="event : ${events}">
+        <td th:text="${event.event_name}"></td>
+        <td th:text="${event.event_time}"></td>
+        <td th:text="${event.event_address}"></td>
+        <td th:text="${event.admin_id}"></td>
+        <td>
+            <a th:href="@{/admin/EventSelected(id=${event.event_id})}">View</a>
+        </td>
+    </tr>
+</table>
+
+<table>
+
+    <tr>
+        <td><a th:href="@{/admin/createEvent}">Create Event</a></td>
+    </tr>
+    <tr>
+        <td><a th:href="@{/admin/uploadHandbook}">Upload Handbook</a></td>
+    </tr>
+    <tr>
+        <td><a th:href="@{/admin/uploadTravelInfo}">Upload Travel Information</a></td>
+    </tr>
+    <tr>
+        <td><a th:href="@{/logout}">Sign out</a></td>
+    </tr>
+    <tr>
+        <td><a th:href="@{/archiveEvent}">Archive Event</a></td>
+    </tr>
+</table>
 </body>
+
 </html>
+
+
