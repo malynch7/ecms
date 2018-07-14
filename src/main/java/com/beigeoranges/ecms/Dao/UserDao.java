@@ -105,4 +105,11 @@ public class UserDao extends JdbcDaoSupport {
 
         return userid;
     }
+
+    public void editProfile(UserForm userForm, int userId){
+        String encryptedPassword = EncryptedPasswordUtils.encryptPassword(userForm.getPassword());
+
+        String sql = "UPDATE users SET email = ?, first_name = ?, last_name = ?, encrypted_password = ? WHERE user_id = ?";
+        getJdbcTemplate().update(sql, new Object[] {userForm.getEmail(), userForm.getFirstName(), userForm.getLastName(), encryptedPassword, userId});
+    }
 }

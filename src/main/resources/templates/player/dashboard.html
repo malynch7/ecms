@@ -2,65 +2,69 @@
 <html xmlns:th="http://www.thymeleaf.org" style="border: 1px solid #ccc;padding:5px;margin-bottom:20px;">
 <head>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <title>ECMS Player Dashboard</title>
-    <h1>ECMS Player Dashboard</h1>
+
+    <style>
+        body, html {
+            height: 100%;
+            background-repeat: no-repeat;
+            background-image: linear-gradient(rgba(247, 187, 103, 0.92), rgb(247, 187, 103));
+        }
+    </style>
+
 </head>
 
 <body>
+
+<th:block th:include="/player/navbar"></th:block>
 <br><br>
 
-<table>
-    <tr>
-        <td><h1>Invited Events</h1></td>
-    </tr>
-    <tr>
-        <td th:if="${isInvitedEmpty}">You have not been invited to any events</td>
-    </tr>
-    <th:block th:each="invitedEvent : ${invitedEvents}">
-        <tr>
-            <td th:text="${invitedEvent.getEvent_name()}">...</td>
-            <td>
-                <form th:action="@{/player/viewEvent}" th:value="${invitedEvent}" th:name="invitedEvents" method="post">
-                    <button type="submit" class="btn btn-link">View</button>
-                </form>
-            </td>
-        </tr>
-    </th:block>
-</table>
-<br><br>
-<table>
-    <tr>
-        <td><h1>Confirmed Events</h1></td>
-    </tr>
-    <tr>
-        <td th:if="${isConfirmedEmpty}">You have not confirmed any events</td>
-    </tr>
-    <th:block th:each="confirmedEvent : ${confirmedEvents}">
-        <tr>
-            <td th:text="${confirmedEvent.getEvent_name()}">...</td>
-        </tr>
-    </th:block>
-</table>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <ul class="list-group">
+                <li th:align="center" class="list-group-item active"><h3>Confirmed Events</h3></li>
+                <li class="list-group-item" th:if="${isConfirmedEmpty}" th:align="center">You have not confirmed any events</li>
+                <th:block th:each="confirmedEvent : ${confirmedEvents}">
+                    <li th:align="center" class="list-group-item">
+                        <form th:action="@{/player/viewEvent}" th:object="${confirmedEvent}" method="post">
+                            <input type="hidden" th:value="*{event_id}" name="event_id" />
+                            <input type="hidden" th:value="*{event_name}" name="event_name" />
+                            <input type="hidden" th:value="*{event_time}" name="event_time" />
+                            <input type="hidden" th:value="*{event_address}" name="event_address" />
+                            <input type="hidden" th:value="*{admin_id}" name="admin_id" />
+                            <button type="submit" class="btn btn-link" th:text="${confirmedEvent.getEvent_name()}"></button>
+                        </form>
+                    </li>
+                </th:block>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <ul class="list-group">
+                <li class="list-group-item active" th:align="center"><h3>Invited Events</h3></li>
+                <li class="list-group-item" th:if="${isInvitedEmpty}" th:align="center">You have no new event invitations</li>
+                <th:block th:each="invitedEvent : ${invitedEvents}">
+                    <li class="list-group-item">
+                        <form th:align="center" th:action="@{/player/viewEvent}" th:object="${invitedEvent}" method="post">
+                            <input type="hidden" th:value="*{event_id}" name="event_id" />
+                            <input type="hidden" th:value="*{event_name}" name="event_name" />
+                            <input type="hidden" th:value="*{event_time}" name="event_time" />
+                            <input type="hidden" th:value="*{event_address}" name="event_address" />
+                            <input type="hidden" th:value="*{admin_id}" name="admin_id" />
+                            <button type="submit" class="btn btn-link" th:text="${invitedEvent.getEvent_name()}"></button>
+                        </form>
+                    </li>
+                </th:block>
+            </ul>
+        </div>
+    </div>
+</div>
 
-<br><br>
-
-<table>
-    <tr>
-        <td><a th:href="@{/player/viewArchived}">View your past Events</a></td>
-    </tr>
-    <tr>
-        <td><a th:href="@{/player/viewEvents}">View Current Events</a></td>
-    </tr>
-    <tr>
-        <td><a th:href="@{/player/viewFlights}">View Flight Information</a></td>
-    </tr>
-    <tr>
-        <td><a th:href="@{/logout}">Sign out</a></td>
-    </tr>
-</table>
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

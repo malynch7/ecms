@@ -92,5 +92,12 @@ public class EventDao extends JdbcDaoSupport {
         System.out.println(confirmedEvents.toString());
         return confirmedEvents;
     }
+
+    public void RSVP(int eventId, int userId){
+        String sql = "UPDATE registered_to SET RSVP = 1 WHERE event_id = ? AND user_id = ?";
+        getJdbcTemplate().update(sql, new Object[] {eventId, userId});
+
+
+    }
 }
 

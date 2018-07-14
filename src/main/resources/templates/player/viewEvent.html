@@ -1,16 +1,74 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" style="border: 1px solid #ccc;padding:5px;margin-bottom:20px;">
+
 <head>
-    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>View Event</title>
+
+    <style>
+        body, html {
+            height: 100%;
+            background-repeat: no-repeat;
+            background-image: linear-gradient(rgba(247, 187, 103, 0.92), rgb(247, 187, 103));
+        }
+    </style>
+
 </head>
+
 <body>
 
-<h1 th:text="${event.getEvent_name()}">...</h1>
+<th:block th:include="/player/navbar"></th:block>
+<br><br>
 
-<p th:text="${event.getEvent_id()}">...</p>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <ul class="list-group">
+                    <li th:align="center" class="list-group-item active" >
+                        <h2 th:text="${event.getEvent_name()}"></h2>
+                    </li>
+                    <li class="list-group-item">
+                        <table class="table-sm" >
+                            <tr>
+                                <td>Time:</td>
+                                <td th:text="${event.getEvent_time()}"></td>
+                            </tr>
+                            <tr>
+                                <td>Address:</td>
+                                <td th:text="${event.getEvent_address()}"></td>
+                            </tr>
+                        </table>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <br><br>
+                <form th:if="${confirmed}" th:align="center" th:action="@{/player/viewTravelInfo}" th:object="${event}" method="post">
+                    <input type="hidden" th:value="*{event_id}" name="event_id" />
+                    <input type="hidden" th:value="*{event_name}" name="event_name" />
+                    <input type="hidden" th:value="*{event_time}" name="event_time" />
+                    <input type="hidden" th:value="*{event_address}" name="event_address" />
+                    <input type="hidden" th:value="*{admin_id}" name="admin_id" />
+                    <button type="submit" class="btn btn-primary">View Travel Information</button>
+                </form>
+                <form th:if="${!confirmed}" th:align="center" th:action="@{/player/confirm}" th:object="${event}" method="post">
+                    <input type="hidden" th:value="*{event_id}" name="event_id" />
+                    <input type="hidden" th:value="*{event_name}" name="event_name" />
+                    <input type="hidden" th:value="*{event_time}" name="event_time" />
+                    <input type="hidden" th:value="*{event_address}" name="event_address" />
+                    <input type="hidden" th:value="*{admin_id}" name="admin_id" />
+                    <button type="submit" class="btn btn-primary">Confirm Attendance</button>
+                </form>
+            </div>
+        </div>
+    </div>
 
 
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
 
 </body>
 </html>
