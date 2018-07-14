@@ -7,7 +7,6 @@ import com.beigeoranges.ecms.Model.Event;
 import com.beigeoranges.ecms.Model.TravelForm;
 import com.beigeoranges.ecms.Model.UserForm;
 import com.beigeoranges.ecms.Utils.ProfileValidator;
-import com.beigeoranges.ecms.Utils.RegistrationValidator;
 import com.beigeoranges.ecms.Utils.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
