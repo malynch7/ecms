@@ -71,7 +71,7 @@ public class UserDao extends JdbcDaoSupport {
         return user;
     }
 
-    public List<User> getAllUsers(){
+    public List<User> getAllUsers(){ //admins and players
         String sqlgetallusers = "SELECT * FROM users";
 
         try {
@@ -80,6 +80,18 @@ public class UserDao extends JdbcDaoSupport {
             return null;
         }
     }
+
+    public List<User> getAllPlayers(){ //players
+        String sqlGetAllPlayers = "SELECT users.* FROM users, user_role WHERE user_role.role_id = 2 AND users.user_id = user_role.user_id ";
+
+        try {
+            return getJdbcTemplate().query(sqlGetAllPlayers, new UserMapper());
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+
 
 
     public User findUserByEmail(String email) {
@@ -105,6 +117,38 @@ public class UserDao extends JdbcDaoSupport {
 
         return userid;
     }
+    public List<User> getUninvitedUsers(int eventId){
+        String sqlGetUninvitedUsers = "SELECT users.* FROM users, registered_to, user_role WHERE registered_to.event_id = '" + eventId  + "' AND users.user_id NOT IN (SELECT registered_to.user_id FROM registered_to) " +
+                " AND user_role.role_id = 2 AND users.user_id = user_role.user_id";
+
+        try {
+            return getJdbcTemplate().query(sqlGetUninvitedUsers, new UserMapper());
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public List<User> getInvitedUsers(int eventId){
+        String sqlGetInvitedUsers = "SELECT users.* FROM users, registered_to WHERE registered_to.event_id = '" + eventId  + "' AND registered_to.user_id = users.user_id AND RSVP = 0";
+
+        try {
+            return getJdbcTemplate().query(sqlGetInvitedUsers, new UserMapper());
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public List<User> getRSVPUsers(int eventId){
+        String sqlGetRSVPUsers = "SELECT users.* FROM users, registered_to WHERE registered_to.event_id = '" + eventId  + "' AND registered_to.user_id = users.user_id AND RSVP = 1";
+
+        try {
+            return getJdbcTemplate().query(sqlGetRSVPUsers, new UserMapper());
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+
 
     public void editProfile(UserForm userForm, int userId){
         String encryptedPassword = EncryptedPasswordUtils.encryptPassword(userForm.getPassword());

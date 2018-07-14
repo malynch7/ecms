@@ -32,4 +32,15 @@ import org.springframework.transaction.annotation.Transactional;
             return roles;
         }
 
+        public int checkRole(int userId){
+            String sqlCheckRole= "SELECT role_id FROM user_role WHERE user_id = '" + userId + "'";
+
+            try {
+                return getJdbcTemplate().queryForObject(sqlCheckRole, Integer.class);
+            } catch (Exception e) {
+                return 0;
+            }
+        }
+
+
     }

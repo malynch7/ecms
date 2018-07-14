@@ -6,20 +6,64 @@
 </head>
 
 <body>
+<form th:action="@{/admin/EventSelected}" method="POST">
 <table>
     <tr>
-        <th>Confirmed</th>
-        <th>Invited</th>
+        <th>UnInvited</th>
+        <th>_</th>
+        <th>User ID</th>
+        <th>Email</th>
         <th>First Name</th>
         <th>Last Name</th>
 
     </tr>
-    <tr th:each="player : ${players}">
-        <td th:text="${player.user_Id}"></td>
-        <td th:text="${player.email}"></td>
-        <td th:text="${player.first_name}"></td>
-        <td th:text="${player.last_name}"></td>
+    <tr th:each="p1 : ${Uninvited}">
+        <td th:text="${p1.userId}"></td>
+        <td th:text="${p1.email}"></td>
+        <td th:text="${p1.firstName}"></td>
+        <td th:text="${p1.lastName}"></td>
+        <td>&nbsp;</td>
+        <td>
+            <input type="submit" value="Invite" />
+        </td>
+        <td>&nbsp;</td>
+    </tr>
 
+</table>
+</form>
+<table>
+    <tr>
+        <th>Invited</th>
+        <th>_</th>
+        <th>User ID</th>
+        <th>Email</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+
+    </tr>
+    <tr th:each="p2 : ${Invited}">
+        <td th:text="${p2.userId}"></td>
+        <td th:text="${p2.email}"></td>
+        <td th:text="${p2.firstName}"></td>
+        <td th:text="${p2.lastName}"></td>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <th>RSVP</th>
+        <th>_</th>
+        <th>User ID</th>
+        <th>Email</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+
+    </tr>
+    <tr th:each="p3 : ${RSVPd}">
+        <td th:text="${p3.userId}"></td>
+        <td th:text="${p3.email}"></td>
+        <td th:text="${p3.firstName}"></td>
+        <td th:text="${p3.lastName}"></td>
     </tr>
 </table>
 </body>

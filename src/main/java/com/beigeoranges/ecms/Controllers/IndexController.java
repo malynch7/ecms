@@ -41,9 +41,7 @@ public class IndexController {
         model.addAttribute("userInfo", userInfo);
 
         List<Event> eventList = eventDao.getAllEvents();
-
         model.addAttribute("events", eventList);
-        
 
         return "admin/dashboard";
     }
