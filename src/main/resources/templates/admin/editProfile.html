@@ -1,18 +1,20 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" style="border: 1px solid #ccc;padding:5px;margin-bottom:20px;">
 
 <head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-    <link href="../static/css/login.css" th:href="@{css/login.css}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <title> Upload Travel Information </title>
-
+    <title> Profile </title>
     <style>
         span  {
             font-size:90%;
             font-style: italic;
             color: red;
+        }
+        .error {
+            color: red;
+            font-style: italic;
         }
         body, html {
             height: 100%;
@@ -35,44 +37,48 @@
         }
     </style>
 </head>
+
 <body>
 
 <th:block th:include="/admin/navbar"></th:block>
+
 <br><br>
 
+
 <div class="container">
-    <div class="card card-container-lg">
-        <h2 align="center">Upload Travel Information</h2>
+    <div class="card card-container">
+        <h2 align="center">Profile</h2>
         <br>
-        <form th:action="@{/admin/uploadTravel}" th:object="${travelForm}" method='POST'>
+        <div th:if="${errorMessage != null}"
+             th:utext="${errorMessage}" class="error">...</div>
+        <form th:action="@{/admin/editProfile}" th:object="${userForm}" method='POST'>
             <div class="form-group">
-                <label for="inputAirline">Airline </label>
-                <input type="text" id="inputAirline" class="form-control" th:field="*{airline}" />
+                <label for="InputEmail" th:text="'Email address: ' + ${userForm.getEmail()}">Email address <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">..</span></label>
+                <input type="hidden" th:value="${userForm.getEmail()}"  id="inputEmail" class="form-control" th:field="*{email}" />
 
             </div>
             <div class="form-group">
-                <label for="InputFirstName">Departure Time </label>
-                <input type="text" id="inputFirstName" class="form-control" th:field="*{departureTime}" />
+                <label for="InputFirstName">First name <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">..</span></label>
+                <input type="text" id="inputFirstName" class="form-control" th:field="*{firstName}" />
 
             </div>
             <div class="form-group">
-                <label for="InputLastName">Departure Terminal </label>
-                <input type="text" id="inputLastName" class="form-control" th:field="*{departureTerminal}" />
+                <label for="InputLastName">Last name <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">..</span></label>
+                <input type="text" id="inputLastName" class="form-control" th:field="*{lastName}" />
 
             </div>
             <div class="form-group">
-                <label for="InputPassword">Arrival Time </label>
-                <input type="text" id="inputPassword" class="form-control" th:field="*{arrivalTime}" />
+                <label for="InputPassword">Password <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}">..</span></label>
+                <input type="text" id="inputPassword" class="form-control" th:field="*{password}" />
 
             </div>
             <div class="form-group">
-                <label for="InputConfirmPassword">Arrival Terminal</label>
-                <input type="text" id="inputConfirmPassword" class="form-control" th:field="*{arrivalTerminal}" />
+                <label for="InputConfirmPassword">Confirm password <span th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}">..</span></label>
+                <input type="text" id="inputConfirmPassword" class="form-control" th:field="*{confirmPassword}" />
 
             </div>
             <div class="form-group">
-                <label for="InputAdminCode">Confirmation Code</label>
-                <input type="text" id="inputAdminCode" class="form-control" th:field="*{confirmationCode}" />
+                <input type="hidden" id="inputAdminCode" placeholder="Leave blank if not admin" class="form-control"  th:field="*{adminCode}" />
 
             </div>
             <div>
@@ -80,7 +86,8 @@
                 <center><button class="btn btn-lg btn-primary btn-signin" type="submit">Submit</button></center>
                 <br>
             </div>
-            <div >
+            <br>
+            <div>
                 <center>
                     <a th:href="@{/admin/dashboard}">Cancel</a>
                 </center>

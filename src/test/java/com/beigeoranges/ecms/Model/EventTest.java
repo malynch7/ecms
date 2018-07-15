@@ -7,11 +7,11 @@ import static org.junit.Assert.*;
 
 public class EventTest {
 
-    Event aEvent = new Event(12, "Halloween", "11:30", "Scary Lane", 31);
+    Event aEvent = new Event(12, "Halloween", "11:30", "Scary Lane", 31, "1/1/1999");
 
     @Before
     public void initialize(){
-        aEvent = new Event(12, "Halloween", "11:30", "Scary Lane", 31);
+        aEvent = new Event(12, "Halloween", "11:30", "Scary Lane", 31, "1/1/1999");
     }
     @Test
     public void getAdmin_id() {
