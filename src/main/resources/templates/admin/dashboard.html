@@ -1,50 +1,90 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" style="border: 1px solid #ccc;padding:5px;margin-bottom:20px;">
 <head>
-    <title>ECMS Admin Dashboard</title>
-    <h1>Admin Dashboard</h1>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>ECMS Administrator Dashboard</title>
+
+    <style>
+        body, html {
+            height: 100%;
+            background-repeat: no-repeat;
+            background-image: linear-gradient(rgba(247, 187, 103, 0.92), rgb(247, 187, 103));
+        }
+    </style>
+
 </head>
 
 <body>
-<table>
-    <tr>
-        <th>Event Name</th>
-        <th>Event Time</th>
-        <th>Event Address</th>
-        <th>Admin ID</th>
 
-    </tr>
-    <tr th:each="event : ${events}">
-        <td th:text="${event.event_name}"></td>
-        <td th:text="${event.event_time}"></td>
-        <td th:text="${event.event_address}"></td>
-        <td th:text="${event.admin_id}"></td>
-        <td>
-            <a th:href="@{/admin/EventSelected(id=${event.event_id})}">View</a>
-        </td>
-    </tr>
-</table>
+<th:block th:include="/admin/navbar"></th:block>
+<br><br>
 
-<table>
+<div class="container">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-8">
+            <ul class="list-group">
+                <li th:align="center" class="list-group-item active"><h3>Events</h3></li>
+                <li class="list-group-item" th:if="${events.isEmpty()}" th:align="center">You have no active events</li>
+                <th:block th:each="event : ${events}">
+                    <li class="list-group-item">
+                        <table class="table">
+                            <tr>
+                                <td>
+                                    <form th:action="@{/admin/viewEvent}" th:object="${event}" method="post">
+                                        <input type="hidden" th:value="*{event_id}" name="event_id" />
+                                        <input type="hidden" th:value="*{event_name}" name="event_name" />
+                                        <input type="hidden" th:value="*{event_time}" name="event_time" />
+                                        <input type="hidden" th:value="*{event_address}" name="event_address" />
+                                        <input type="hidden" th:value="*{admin_id}" name="admin_id" />
+                                        <input type="hidden" th:value="*{event_date}" name="event_date" />
+                                        <button type="submit" class="btn btn-link" th:text="${event.getEvent_name()}"></button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form th:align="right" th:action="@{/admin/archiveEvent}" th:object="${event}" method="post">
+                                        <input type="hidden" th:value="*{event_id}" name="event_id" />
+                                        <input type="hidden" th:value="*{event_name}" name="event_name" />
+                                        <input type="hidden" th:value="*{event_time}" name="event_time" />
+                                        <input type="hidden" th:value="*{event_address}" name="event_address" />
+                                        <input type="hidden" th:value="*{admin_id}" name="admin_id" />
+                                        <input type="hidden" th:value="*{event_date}" name="event_date" />
+                                        <button type="submit" class="btn btn-secondary">Archive</button>
+                                    </form>
+                                </td>
 
-    <tr>
-        <td><a th:href="@{/admin/createEvent}">Create Event</a></td>
-    </tr>
-    <tr>
-        <td><a th:href="@{/admin/uploadHandbook}">Upload Handbook</a></td>
-    </tr>
-    <tr>
-        <td><a th:href="@{/admin/uploadTravelInfo}">Upload Travel Information</a></td>
-    </tr>
-    <tr>
-        <td><a th:href="@{/logout}">Sign out</a></td>
-    </tr>
-    <tr>
-        <td><a th:href="@{/archiveEvent}">Archive Event</a></td>
-    </tr>
-</table>
+                            </tr>
+                        </table>
+                </th:block>
+            </ul>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-2">
+            <br><br>
+            <center>
+                <form th:action="@{/admin/createEvent}" method="get">
+                    <button th:align="center" type="submit" class="btn btn-primary">Create Event</button>
+                </form>
+            </center>
+            <br><br>
+            <center>
+                <form th:action="@{/admin/viewArchived}" method="get">
+                    <button th:align="center" type="submit" class="btn btn-primary">View archived events</button>
+                </form>
+            </center>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
 </body>
 
 </html>
-
-

@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Travel Information</title>
+    <title>Event History</title>
 
     <style>
         body, html {
@@ -33,51 +33,34 @@
 
 <body>
 
-<th:block th:include="/player/navbar"></th:block>
+<th:block th:include="/admin/navbar"></th:block>
 
 <br><br>
 
 <div class="container">
     <div class="card card-container-sm">
-        <h2 align="center">Travel Information</h2>
+        <h2 align="center">Archived Events</h2>
         <br>
         <table class="table">
             <tr>
-                <td>Airline:</td>
-                <td th:text = "${travelForm.getAirline()}"></td>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Address</th>
             </tr>
-            <tr>
-                <td>Departure Time:</td>
-                <td th:text = "${travelForm.getDepartureTime()}"></td>
-            </tr>
-            <tr>
-                <td>Depature Terminal:</td>
-                <td th:text = "${travelForm.getDepartureTerminal()}"></td>
-            </tr>
-            <tr>
-                <td>Arrival Time:</td>
-                <td th:text = "${travelForm.getArrivalTime()}"></td>
-            </tr>
-            <tr>
-                <td>Arrival Terminal:</td>
-                <td th:text = "${travelForm.getArrivalTerminal()}"></td>
-            </tr>
-            <tr>
-                <td>Confirmation Code:</td>
-                <td th:text = "${travelForm.getConfirmationCode()}"></td>
-            </tr>
+            <th:block th:each="event : ${archivedEvents}">
+                <tr>
+                    <td th:text="${event.getEvent_name()}"></td>
+                    <td th:text="${event.getEvent_date()}"></td>
+                    <td th:text="${event.getEvent_time()}"></td>
+                    <td th:text="${event.getEvent_address()}"></td>
+                </tr>
+            </th:block>
         </table>
         <center>
-        <form th:action="@{/player/viewEvent}" th:object="${event}" method="post">
-            <input type="hidden" th:value="*{event_id}" name="event_id" />
-            <input type="hidden" th:value="*{event_name}" name="event_name" />
-            <input type="hidden" th:value="*{event_time}" name="event_time" />
-            <input type="hidden" th:value="*{event_address}" name="event_address" />
-            <input type="hidden" th:value="*{admin_id}" name="admin_id" />
-            <input type="hidden" th:value="*{event_date}" name="event_date" />
-
-            <button th:align="center" type="submit" class="btn btn-link">Return to Event Page</button>
-        </form>
+            <form th:action="@{/admin/dashboard}">
+                <button th:align="center" type="submit" class="btn btn-link">Return to dashboard</button>
+            </form>
         </center>
     </div>
 </div>

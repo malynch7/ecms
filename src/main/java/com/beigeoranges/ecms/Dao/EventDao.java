@@ -28,14 +28,20 @@ public class EventDao extends JdbcDaoSupport {
 
     public void createEvent(Event form){
 
-        String sqlCreateEvent ="INSERT INTO Events (event_name, event_time, event_address, admin_id,event_date) VALUE(?,?,?,?,?)";
+        String sqlCreateEvent ="INSERT INTO Events (event_id, event_name, event_time, event_address, admin_id, event_date) VALUE(?,?,?,?,?,?)";
         String eventName = form.getEvent_name();
         String eventTime = form.getEvent_time();
         String eventAddress = form.getEvent_address();
         int adminId  = form.getAdmin_id();
         String eventDate = form.getEvent_date();
+        int eventId = getMaxEventId() + 1;
 
-        getJdbcTemplate().update(sqlCreateEvent, eventName, eventTime, eventAddress, adminId, eventDate);
+        getJdbcTemplate().update(sqlCreateEvent, eventId, eventName, eventTime, eventAddress, adminId, eventDate);
+
+    }
+
+    public int getMaxEventId(){
+        return getJdbcTemplate().queryForObject("SELECT MAX(event_id) FROM events", Integer.class);
 
     }
     // The below method creates a list of all the events to be used in a dropdown menu
@@ -102,6 +108,12 @@ public class EventDao extends JdbcDaoSupport {
     public void Invite(int eventId, int userId){
         String sql = "INSERT INTO registered_to(event_id, user_id, RSVP) VALUES (?,?,?)";
         getJdbcTemplate().update(sql, new Object[] {eventId, userId}, 0);
+    }
+
+    public Event getEventById(int eventId){
+
+        String sql = "SELECT * FROM events WHERE event_id = ?";
+        return getJdbcTemplate().queryForObject(sql, new Object[] {eventId}, new EventMapper());
     }
 }
 
