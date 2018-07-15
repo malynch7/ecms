@@ -106,8 +106,20 @@ public class EventDao extends JdbcDaoSupport {
     }
 
     public void Invite(int eventId, int userId){
-        String sql = "INSERT INTO registered_to(event_id, user_id, RSVP) VALUES (?,?,?)";
-        getJdbcTemplate().update(sql, new Object[] {eventId, userId, 0});
+        int eventid;
+
+        String sqlCheck = "SELECT RSVP FROM registered_to WHERE event_id = ? AND user_id = ?";
+        int result;
+        try {
+            result = getJdbcTemplate().queryForObject(sqlCheck, new Object[] {eventId, userId}, Integer.class);
+        } catch (EmptyResultDataAccessException e) {
+            result=5;
+        }
+        if(result != 0 && result != 1){
+            String sql = "INSERT INTO registered_to(event_id, user_id, RSVP) VALUES (?,?,?)";
+            getJdbcTemplate().update(sql, new Object[] {eventId, userId, 0});
+        }
+
     }
 
     public Event getEventById(int eventId){
