@@ -166,6 +166,15 @@ public class AdminController {
          eventDao.getEventById(travelForm.getEventId());
         model.addAttribute("event", eventDao.getEventById(travelForm.getEventId()));
 
-        return "redirect:/admin/view Event";
+        List<User> invitedPlayers = userDao.getInvitedPlayers(travelForm.getEventId());
+        model.addAttribute("invitedPlayers", invitedPlayers);
+
+        List<User> confirmedPlayers = userDao.getConfirmedPlayers(travelForm.getEventId());
+        model.addAttribute("confirmedPlayers", confirmedPlayers);
+
+        model.addAttribute("travelForm", new TravelForm());
+        model.addAttribute("invitation", new Invitation());
+
+        return "/admin/viewEvent";
     }
 }
