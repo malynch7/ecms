@@ -37,7 +37,7 @@ public class ArchivedEventDao extends JdbcDaoSupport {
 
     public List<Event> getPlayersArchivedEvents(int userId) {
         String sqlArchivedEventsIds = "SELECT event_id FROM registered_to WHERE user_id = ?";
-        String sqlArchivedEvents = "SELECT * FROM archived_events WHERE event_id = ? AND archive = 1";
+        String sqlArchivedEvents = "SELECT * FROM events WHERE event_id = ? AND archive = 1";
         Object[] params = new Object[]{userId};
 
         List<Integer> archivedEventsIds = getJdbcTemplate().queryForList(sqlArchivedEventsIds, params, Integer.class);

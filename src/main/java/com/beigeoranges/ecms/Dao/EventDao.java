@@ -3,6 +3,7 @@ package com.beigeoranges.ecms.Dao;
 import com.beigeoranges.ecms.Mapper.EventMapper;
 import com.beigeoranges.ecms.Model.Event;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
@@ -63,7 +64,13 @@ public class EventDao extends JdbcDaoSupport {
         List<Event> invitedEvents = new ArrayList<>();
         EventMapper mapper = new EventMapper();
         for(int eventId : invitedEventsIds){
-            invitedEvents.add(getJdbcTemplate().queryForObject(sqlInvitedEvents, new Object[]{eventId}, mapper));
+
+            try {
+                invitedEvents.add(getJdbcTemplate().queryForObject(sqlInvitedEvents, new Object[]{eventId}, mapper));
+
+            } catch (EmptyResultDataAccessException e) {
+
+            }
         }
         System.out.println(invitedEvents.toString());
         return invitedEvents;
@@ -82,7 +89,12 @@ public class EventDao extends JdbcDaoSupport {
         List<Event> confirmedEvents = new ArrayList<>();
         EventMapper mapper = new EventMapper();
         for(int eventId : confirmedEventsIds){
-            confirmedEvents.add(getJdbcTemplate().queryForObject(sqlConfirmedEvents, new Object[]{eventId}, mapper));
+
+            try {
+                confirmedEvents.add(getJdbcTemplate().queryForObject(sqlConfirmedEvents, new Object[]{eventId}, mapper));
+            } catch (EmptyResultDataAccessException e) {
+
+            }
         }
         System.out.println(confirmedEvents.toString());
         return confirmedEvents;

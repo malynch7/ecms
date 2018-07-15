@@ -121,6 +121,12 @@ public class PlayerController {
         int userId = Math.toIntExact((userDao.findUserAccount(userName)).getUserId());
 
         TravelForm travelForm = travelDao.getTravelInfo(event.getEvent_id(), userId);
+
+        boolean noInfo = false;
+        if(travelForm == null){
+            noInfo = true;
+        }
+        model.addAttribute("noInfo", noInfo);
         model.addAttribute("travelForm", travelForm);
         model.addAttribute("event",event);
 

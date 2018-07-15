@@ -41,7 +41,11 @@
     <div class="card card-container-sm">
         <h2 align="center">Travel Information</h2>
         <br>
-        <table class="table">
+
+        <a th:if="${noInfo}" th:align="center">No travel information has been posted</a>
+
+
+        <table th:if="${!noInfo}" class="table">
             <tr>
                 <td>Airline:</td>
                 <td th:text = "${travelForm.getAirline()}"></td>
