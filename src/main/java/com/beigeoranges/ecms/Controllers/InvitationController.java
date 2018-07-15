@@ -6,9 +6,13 @@ import com.beigeoranges.ecms.Dao.UserDao;
 import com.beigeoranges.ecms.Model.Invitation;
 import com.beigeoranges.ecms.Model.TravelForm;
 import com.beigeoranges.ecms.Model.User;
+import com.beigeoranges.ecms.Model.UserForm;
+import com.beigeoranges.ecms.Utils.ProfileValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,6 +26,16 @@ public class InvitationController {
     private EventDao eventDao;
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private ProfileValidator profileValidator;
+
+    @InitBinder
+    protected void initBinder(WebDataBinder dataBinder) {
+
+      return;
+
+    }
 
 
     @RequestMapping(value = "/admin/invite", method = RequestMethod.POST)

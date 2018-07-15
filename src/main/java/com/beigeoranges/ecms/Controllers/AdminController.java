@@ -45,10 +45,6 @@ public class AdminController {
         }
         System.out.println("Target=" + target);
 
-        if(target.getClass() == Invitation.class){
-            return;
-        }
-
         if (target.getClass() == UserForm.class) {
             dataBinder.setValidator(profileValidator);
         }
