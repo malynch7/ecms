@@ -20,6 +20,16 @@ public class ArchivedEventDao extends JdbcDaoSupport {
     @Autowired
     public ArchivedEventDao(DataSource dataSource) {this.setDataSource(dataSource);}
 
+<<<<<<< HEAD
+    public void createArchivedEvent(Event aEvent){
+        //should this method also delete this event from events table?
+        String sqlCreateEvent ="INSERT INTO Archived_Events (event_id, event_name, event_time, event_address, admin_id) VALUE(?,?,?,?,?)";
+        int eventid = aEvent.getEvent_id();
+        String eventName = aEvent.getEvent_name();
+        String eventTime = aEvent.getEvent_time();
+        String eventAddress = aEvent.getEvent_address();
+        int adminId = aEvent.getAdmin_id();
+=======
     public void archiveEvent(Event event){
         String sql ="INSERT INTO Archived_Events (event_id, event_name, event_time, event_address, admin_id, event_date) VALUE(?,?,?,?,?,?)";
         int eventId = event.getEvent_id();
@@ -39,6 +49,7 @@ public class ArchivedEventDao extends JdbcDaoSupport {
 
         getJdbcTemplate().update(sql, event.getEvent_id());
     }
+>>>>>>> e3ff97fa98c9c951a054f5467530267d7cbc6762
 
     public List<Event> getArchivedEvents() {
         String sql = "SELECT * FROM Archived_Events";

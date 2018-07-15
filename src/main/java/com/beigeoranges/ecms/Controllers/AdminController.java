@@ -141,15 +141,6 @@ public class AdminController {
         return "admin/viewEvent";
     }
 
-    @RequestMapping(value = "/admin/invite", method = RequestMethod.POST)
-    public String InvitePlayer(Model model, @ModelAttribute("invitation") Invitation invitation) {
-
-            eventDao.Invite(invitation.getEvent().getEvent_id(),userDao.getUserIdByEmail(invitation.getEmail()));
-            model.addAttribute("event", invitation.getEvent());
-
-        return "redirect:/admin/viewEvent";
-    }
-
     @RequestMapping(value = "/admin/createTravel", method = RequestMethod.POST)
     public String createTravel(Model model, @ModelAttribute("travelForm") TravelForm travelForm) {
 
@@ -166,6 +157,15 @@ public class AdminController {
          eventDao.getEventById(travelForm.getEventId());
         model.addAttribute("event", eventDao.getEventById(travelForm.getEventId()));
 
-        return "redirect:/admin/view Event";
+        List<User> invitedPlayers = userDao.getInvitedPlayers(travelForm.getEventId());
+        model.addAttribute("invitedPlayers", invitedPlayers);
+
+        List<User> confirmedPlayers = userDao.getConfirmedPlayers(travelForm.getEventId());
+        model.addAttribute("confirmedPlayers", confirmedPlayers);
+
+        model.addAttribute("travelForm", new TravelForm());
+        model.addAttribute("invitation", new Invitation());
+
+        return "/admin/viewEvent";
     }
 }
