@@ -72,11 +72,11 @@
                                         <input type="hidden" th:value="${event.getEvent_id()}" name="eventId" />
                                         <input type="hidden" th:value="${player.getUserId()}" name="userId" />
                                         <input type="hidden" th:value="*{airline}" name="airline" />
-                                        <input type="hidden" th:value="*{departureTime}" name="airline" />
-                                        <input type="hidden" th:value="*{arrivalTime}" name="airline" />
-                                        <input type="hidden" th:value="*{arrivalTerminal}" name="airline" />
-                                        <input type="hidden" th:value="*{departureTerminal}" name="airline" />
-                                        <input type="hidden" th:value="*{confirmationCode}" name="airline" />
+                                        <input type="hidden" th:value="*{departureTime}" name="departureTime" />
+                                        <input type="hidden" th:value="*{arrivalTime}" name="arrivalTime" />
+                                        <input type="hidden" th:value="*{arrivalTerminal}" name="arrivalTerminal" />
+                                        <input type="hidden" th:value="*{departureTerminal}" name="departureTerminal" />
+                                        <input type="hidden" th:value="*{confirmationCode}" name="confirmationCode" />
                                         <button type="submit" class="btn btn-primary">Upload Travel Information</button>
                                     </form>
                                 </td>
