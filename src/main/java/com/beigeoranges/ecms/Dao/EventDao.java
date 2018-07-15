@@ -28,15 +28,15 @@ public class EventDao extends JdbcDaoSupport {
 
     public void createEvent(Event form){
 
-        String sqlCreateEvent ="INSERT INTO Events (event_id, event_name, event_time, event_address, admin_id, event_date) VALUE(?,?,?,?,?,?)";
+        String sqlCreateEvent ="INSERT INTO Events (event_name, event_time, event_address, admin_id, event_date) VALUE(?,?,?,?,?)";
         String eventName = form.getEvent_name();
         String eventTime = form.getEvent_time();
         String eventAddress = form.getEvent_address();
         int adminId  = form.getAdmin_id();
         String eventDate = form.getEvent_date();
-        int eventId = getMaxEventId() + 1;
+        //int eventId = getMaxEventId() + 1;
 
-        getJdbcTemplate().update(sqlCreateEvent, eventId, eventName, eventTime, eventAddress, adminId, eventDate);
+        getJdbcTemplate().update(sqlCreateEvent, eventName, eventTime, eventAddress, adminId, eventDate);
 
     }
 

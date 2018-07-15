@@ -119,6 +119,8 @@ public class AdminController {
     @RequestMapping(value = "/admin/createEvent", method = RequestMethod.POST)
     public String saveEvent(Model model, Principal principal, @ModelAttribute(value = "event") Event event, BindingResult result) {
 
+        String username = principal.getName();
+        event.setAdmin_id(userDao.getUserIdByEmail(username));
         eventDao.createEvent(event);
 
         return "redirect:/admin/dashboard";
