@@ -104,18 +104,10 @@ public class UserDao extends JdbcDaoSupport {
 
 
     public int getUserIdByEmail(String username) {
-        int userid = 0;
-        /*
-        String sqlgetemail = "SELECT user_id FROM users WHERE email = ?";
-        //Object Ousername = username; // attempt to fix casting userid into Object[]
 
-        userid = getJdbcTemplate().queryForObject(sqlgetemail, new Object[] {username}, Integer.class);
-        System.out.println(getJdbcTemplate().queryForObject(sqlgetemail, new Object[] {username}, Integer.class));
-        */
         String sqlgetemail2 = "SELECT user_id FROM users WHERE email = '"+username+"'";
-        userid = getJdbcTemplate().queryForObject(sqlgetemail2, Integer.class);
+        return getJdbcTemplate().queryForObject(sqlgetemail2, Integer.class);
 
-        return userid;
     }
     public List<User> getUninvitedUsers(int eventId){
         String sqlGetUninvitedUsers = "SELECT users.* FROM users, registered_to, user_role WHERE registered_to.event_id = '" + eventId  + "' AND users.user_id NOT IN (SELECT registered_to.user_id FROM registered_to) " +
@@ -128,7 +120,7 @@ public class UserDao extends JdbcDaoSupport {
         }
     }
 
-    public List<User> getInvitedUsers(int eventId){
+    public List<User> getInvitedPlayers(int eventId){
         String sqlGetInvitedUsers = "SELECT users.* FROM users, registered_to WHERE registered_to.event_id = '" + eventId  + "' AND registered_to.user_id = users.user_id AND RSVP = 0";
 
         try {
@@ -138,7 +130,7 @@ public class UserDao extends JdbcDaoSupport {
         }
     }
 
-    public List<User> getRSVPUsers(int eventId){
+    public List<User> getConfirmedPlayers(int eventId){
         String sqlGetRSVPUsers = "SELECT users.* FROM users, registered_to WHERE registered_to.event_id = '" + eventId  + "' AND registered_to.user_id = users.user_id AND RSVP = 1";
 
         try {

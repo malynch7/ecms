@@ -66,6 +66,26 @@
         <td th:text="${p3.lastName}"></td>
     </tr>
 </table>
+
+<form th:action="@{/admin/EventSelected}" th:object="${invite}" method="POST">
+    <table>
+
+        <tr>
+            <td>Email</td>
+            <td><input type="text" /> </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>
+                <input type="submit" value="Submit" />
+                <a th:href="@{/}">Cancel</a>
+            </td>
+            <td>&nbsp;</td>
+        </tr>
+    </table>
+</form>
 </body>
 
 </html>

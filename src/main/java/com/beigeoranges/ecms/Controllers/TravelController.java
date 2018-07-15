@@ -28,24 +28,12 @@ public class TravelController {
     }
 
     @RequestMapping(value = "/admin/createTravel", method = RequestMethod.POST)
-    public String saveTravel(Model model, Principal principal, @ModelAttribute(value="travel") TravelForm travel, BindingResult result) {
+    public String saveTravel(Model model, Principal principal, @ModelAttribute(value="travel") TravelForm travel) {
 
-        // Validate result
-        if (result.hasErrors()) {
-            return "admin/createTravel";
-        }
-        try {
-            String username = principal.getName();
-           // travel.setUser_id(userDao.getUserIdByEmail(username));
+
             travelDao.createFlight(travel);
 
-        }
-        // Other error!!
-        catch (Exception e) {
-            model.addAttribute("errorMessage", "Error: " + e.getMessage());
 
-            return "admin/createTravel";
-        }
         return "redirect:/admin/dashboard";
     }
 }
