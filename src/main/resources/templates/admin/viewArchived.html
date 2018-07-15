@@ -33,13 +33,13 @@
 
 <body>
 
-<th:block th:include="/player/navbar"></th:block>
+<th:block th:include="/admin/navbar"></th:block>
 
 <br><br>
 
 <div class="container">
     <div class="card card-container-sm">
-        <h2 align="center">Event History</h2>
+        <h2 align="center">Archived Events</h2>
         <br>
         <table class="table">
             <tr>
@@ -58,7 +58,7 @@
             </th:block>
         </table>
         <center>
-            <form th:action="@{/player/dashboard}">
+            <form th:action="@{/admin/dashboard}">
                 <button th:align="center" type="submit" class="btn btn-link">Return to dashboard</button>
             </form>
         </center>

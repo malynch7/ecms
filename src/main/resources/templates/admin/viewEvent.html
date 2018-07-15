@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" style="border: 1px solid #ccc;padding:5px;margin-bottom:20px;">
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>View Event</title>
+
+    <style>
+        body, html {
+            height: 100%;
+            background-repeat: no-repeat;
+            background-image: linear-gradient(rgba(247, 187, 103, 0.92), rgb(247, 187, 103));
+        }
+    </style>
+
+</head>
+
+<body>
+
+<th:block th:include="/admin/navbar"></th:block>
+<br><br>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"><!-- Event info. -->
+            <ul class="list-group">
+                <li th:align="center" class="list-group-item active" >
+                    <h2 th:text="${event.getEvent_name()}"></h2>
+                </li>
+                <li class="list-group-item">
+                    <table class="table-sm" >
+                        <tr>
+                            <td>Date:</td>
+                            <td th:text="${event.getEvent_date()}"></td>
+                        </tr>
+                        <tr>
+                            <td>Time:</td>
+                            <td th:text="${event.getEvent_time()}"></td>
+                        </tr>
+                        <tr>
+                            <td>Address:</td>
+                            <td th:text="${event.getEvent_address()}"></td>
+                        </tr>
+                    </table>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-6"><!-- Confirmed players -->
+            <ul class="list-group">
+                <li th:align="center" class="list-group-item active" >
+                    <h2>Confirmed Players</h2>
+                </li>
+                <li class="list-group-item">
+                <li class="list-group-item" th:if="${confirmedPlayers.isEmpty()}" th:align="center">You have not confirmed any players</li>
+                <li class="list-group-item" th:if="${!confirmedPlayers.isEmpty()}">
+                    <table class="table" >
+                        <tr>
+                            <th>Last</th>
+                            <th>First</th>
+                            <th>Email</th>
+                            <th>Travel Info.</th>
+                        </tr>
+                        <th:block th:each="player : ${confirmedPlayers}">
+                            <tr>
+                                <td th:text="${player.getLastName()}"></td>
+                                <td th:text="${player.getFirstName()}"></td>
+                                <td th:text="${player.getEmail()}"></td>
+
+                                <td>
+                                    <form th:align="center" th:action="@{/admin/createTravel}" th:object="${travelForm}" method="post">
+                                        <input type="hidden" th:value="${event.getEvent_id()}" name="eventId" />
+                                        <input type="hidden" th:value="${player.getUserId()}" name="userId" />
+                                        <input type="hidden" th:value="*{airline}" name="airline" />
+                                        <input type="hidden" th:value="*{departureTime}" name="departureTime" />
+                                        <input type="hidden" th:value="*{arrivalTime}" name="arrivalTime" />
+                                        <input type="hidden" th:value="*{arrivalTerminal}" name="arrivalTerminal" />
+                                        <input type="hidden" th:value="*{departureTerminal}" name="departureTerminal" />
+                                        <input type="hidden" th:value="*{confirmationCode}" name="confirmationCode" />
+                                        <button type="submit" class="btn btn-primary">Upload</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </th:block>
+                    </table>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-3"><!-- Invited players -->
+            <ul class="list-group">
+                <li th:align="center" class="list-group-item active" >
+                    <h2>Invited Players</h2>
+                </li>
+                <li class="list-group-item">
+                    <form th:align="center" th:action="@{/admin/invite}" th:object="${invitation}" method="post">
+                        <input type="text" class="form-control mb-2 mr-sm-2" th:field="*{email}"  placeholder="Email">
+                        <input type="hidden" th:value="${event}" name="event">
+                        <button type="submit" class="btn btn-secondary mb-2">Invite</button>
+                    </form>
+                </li>
+                <li class="list-group-item" th:if="${invitedPlayers.isEmpty()}" th:align="center">You do not have any open invitations</li>
+                <li class="list-group-item" th:if="${!invitedPlayers.isEmpty()}">
+                    <table class="table-sm" >
+                        <tr>
+                            <th>Last name</th>
+                            <th>First name</th>
+                            <th>Email</th>
+                            <td></td>
+                        </tr>
+                        <th:block th:each="player : ${invitedPlayers}">
+                            <tr>
+                                <td th:text="${player.getFirstName()}"></td>
+                                <td th:text="${player.getLastName()}"></td>
+                                <td th:text="${player.getEmail()}"></td>
+                            </tr>
+                        </th:block>
+                    </table>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+
+</body>
+</html>

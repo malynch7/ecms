@@ -1,82 +1,102 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" style="border: 1px solid #ccc;padding:5px;margin-bottom:20px;">
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title>Create Event</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <title> Upload Travel Information </title>
+
+    <style>
+        span  {
+            font-size:90%;
+            font-style: italic;
+            color: red;
+        }
+        body, html {
+            height: 100%;
+            background-repeat: no-repeat;
+            background-image: linear-gradient(rgba(247, 187, 103, 0.92), rgb(247, 187, 103));
+        }
+        .card {
+            background-color: #F7F7F7;
+            /* just in case there no content*/
+            padding: 20px 25px 30px;
+            margin: 0 auto 25px;
+            margin-top: 50px;
+            /* shadows and rounded borders */
+            -moz-border-radius: 2px;
+            -webkit-border-radius: 2px;
+            border-radius: 2px;
+            -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+            -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        }
+    </style>
 </head>
-
 <body>
 
-<h1>Create Event</h1>
+<th:block th:include="/admin/navbar"></th:block>
+<br><br>
+
+<div class="container">
+    <div class="card card-container-lg">
+        <h2 align="center">Upload Travel Information</h2>
+        <br>
+        <form th:action="@{/admin/uploadTravel}" th:object="${travelForm}" method='POST'>
+            <div class="form-group">
+                <label for="inputAirline">Airline </label>
+                <input type="text" id="inputAirline" class="form-control" th:field="*{airline}" />
+
+            </div>
+            <div class="form-group">
+                <label for="InputFirstName">Departure Time </label>
+                <input type="text" id="inputFirstName" class="form-control" th:field="*{departureTime}" />
+
+            </div>
+            <div class="form-group">
+                <label for="InputLastName">Departure Terminal </label>
+                <input type="text" id="inputLastName" class="form-control" th:field="*{departureTerminal}" />
+
+            </div>
+            <div class="form-group">
+                <label for="InputPassword">Arrival Time </label>
+                <input type="text" id="inputPassword" class="form-control" th:field="*{arrivalTime}" />
+
+            </div>
+            <div class="form-group">
+                <label for="InputConfirmPassword">Arrival Terminal</label>
+                <input type="text" id="inputConfirmPassword" class="form-control" th:field="*{arrivalTerminal}" />
+
+            </div>
+            <div class="form-group">
+                <label for="InputAdminCode">Confirmation Code</label>
+                <input type="text" id="inputAdminCode" class="form-control" th:field="*{confirmationCode}" />
+
+            </div>
+            <input type="hidden" th:value="*{eventId}" name="eventId" />
+            <input type="hidden" th:value="*{userId}" name="userId" />
+            <div>
+                <br>
+                <center><button class="btn btn-lg btn-primary" type="submit">Submit</button></center>
+                <br>
+            </div>
+            <div >
+                <center>
+                    <a th:href="@{/admin/dashboard}">Cancel</a>
+                </center>
+
+            </div>
+        </form><!-- /form -->
+    </div>
+</div>
 
 
-<form th:action="@{/admin/createTravel}" th:object="${travel}" method="POST">
-    <table>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 
-        <tr>
-            <td>Flight Airline</td>
-            <td><input type="text" th:field="*{flight_airline}" /> </td>
-            <td>
-            </td>
-        </tr>
-        <tr>
-            <td>Flight Departure</td>
-            <td><input type="text" th:field="*{flight_depart}" /> </td>
-            <td>
-            </td>
-        </tr>
-        <tr>
-            <td>Flight Arrival</td>
-            <td><input type="text" th:field="*{flight_arrival}" /> </td>
-            <td>
-            </td>
-        </tr>
-        <tr>
-            <td>Arrival Terminal</td>
-            <td><input type="text" th:field="*{arrival_terminal}" /> </td>
-            <td>
-            </td>
-        </tr>
-        <tr>
-            <td>Flight Confirmation</td>
-            <td><input type="text" th:field="*{flight_confirmationl}" /> </td>
-            <td>
-            </td>
-        </tr>
-        <tr>
-            <td>Departure Terminal</td>
-            <td><input type="text" th:field="*{departure_terminal}" /> </td>
-            <td>
-            </td>
-        </tr>
-        <tr>
-            <td>User E-mail</td>
-            <td><input type="text" th:field="*{flight_arrival}" /> </td>
-            <td>
-            </td>
-        </tr>
-        <tr>
-            <td>Event Name</td>
-            <td><input type="text" th:field="*{flight_arrival}" /> </td>
-            <td>
-            </td>
-        </tr>
-
-        <tr>
-
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
-            <td>
-                <input type="submit" value="Submit" />
-                <a th:href="@{/}">Cancel</a>
-            </td>
-            <td>&nbsp;</td>
-        </tr>
-    </table>
-</form>
 
 </body>
 
 </html>
-

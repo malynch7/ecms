@@ -32,23 +32,6 @@ public class IndexController {
         return "index";
     }
 
-    @RequestMapping(value = {"/admin", "/admin/dashboard"}, method = RequestMethod.GET)
-    public String adminPage(Model model, Principal principal) {
-
-        User loginedUser = (User) ((Authentication) principal).getPrincipal();
-
-        String userInfo = WebUtils.toString(loginedUser);
-        model.addAttribute("userInfo", userInfo);
-
-        List<Event> eventList = eventDao.getAllEvents();
-
-        model.addAttribute("events", eventList);
-        
-
-        return "admin/dashboard";
-    }
-
-
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage(Model model) {
 

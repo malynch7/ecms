@@ -3,6 +3,7 @@ package com.beigeoranges.ecms.Controllers;
 
 import java.security.Principal;
 
+import com.beigeoranges.ecms.Model.Invitation;
 import com.beigeoranges.ecms.Model.User;
 import com.beigeoranges.ecms.Dao.UserDao;
 import com.beigeoranges.ecms.Model.UserForm;
@@ -36,6 +37,10 @@ public class UserController {
         // Form target
         Object target = dataBinder.getTarget();
         if (target == null) {
+            return;
+        }
+
+        if(target.getClass() == Invitation.class){
             return;
         }
         System.out.println("Target=" + target);

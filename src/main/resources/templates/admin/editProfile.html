@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" style="border: 1px solid #ccc;padding:5px;margin-bottom:20px;">
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title> Profile </title>
+    <style>
+        span  {
+            font-size:90%;
+            font-style: italic;
+            color: red;
+        }
+        .error {
+            color: red;
+            font-style: italic;
+        }
+        body, html {
+            height: 100%;
+            background-repeat: no-repeat;
+            background-image: linear-gradient(rgba(247, 187, 103, 0.92), rgb(247, 187, 103));
+        }
+        .card {
+            background-color: #F7F7F7;
+            /* just in case there no content*/
+            padding: 20px 25px 30px;
+            margin: 0 auto 25px;
+            margin-top: 50px;
+            /* shadows and rounded borders */
+            -moz-border-radius: 2px;
+            -webkit-border-radius: 2px;
+            border-radius: 2px;
+            -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+            -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+
+<body>
+
+<th:block th:include="/admin/navbar"></th:block>
+
+<br><br>
+
+
+<div class="container">
+    <div class="card card-container">
+        <h2 align="center">Profile</h2>
+        <br>
+        <div th:if="${errorMessage != null}"
+             th:utext="${errorMessage}" class="error">...</div>
+        <form th:action="@{/admin/editProfile}" th:object="${userForm}" method='POST'>
+            <div class="form-group">
+                <label for="InputEmail" th:text="'Email address: ' + ${userForm.getEmail()}">Email address <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">..</span></label>
+                <input type="hidden" th:value="${userForm.getEmail()}"  id="inputEmail" class="form-control" th:field="*{email}" />
+
+            </div>
+            <div class="form-group">
+                <label for="InputFirstName">First name <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">..</span></label>
+                <input type="text" id="inputFirstName" class="form-control" th:field="*{firstName}" />
+
+            </div>
+            <div class="form-group">
+                <label for="InputLastName">Last name <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">..</span></label>
+                <input type="text" id="inputLastName" class="form-control" th:field="*{lastName}" />
+
+            </div>
+            <div class="form-group">
+                <label for="InputPassword">Password <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}">..</span></label>
+                <input type="text" id="inputPassword" class="form-control" th:field="*{password}" />
+
+            </div>
+            <div class="form-group">
+                <label for="InputConfirmPassword">Confirm password <span th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}">..</span></label>
+                <input type="text" id="inputConfirmPassword" class="form-control" th:field="*{confirmPassword}" />
+
+            </div>
+            <div class="form-group">
+                <input type="hidden" id="inputAdminCode" placeholder="Leave blank if not admin" class="form-control"  th:field="*{adminCode}" />
+
+            </div>
+            <div>
+                <br>
+                <center><button class="btn btn-lg btn-primary btn-signin" type="submit">Submit</button></center>
+                <br>
+            </div>
+            <br>
+            <div>
+                <center>
+                    <a th:href="@{/admin/dashboard}">Cancel</a>
+                </center>
+
+            </div>
+        </form><!-- /form -->
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>
