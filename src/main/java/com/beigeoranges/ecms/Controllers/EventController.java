@@ -69,7 +69,6 @@ public class EventController {
 
         model.addAttribute("player", userList);
 
-
         return "admin/EventSelected";
     }
 

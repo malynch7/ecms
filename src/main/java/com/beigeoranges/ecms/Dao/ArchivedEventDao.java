@@ -18,6 +18,7 @@ public class ArchivedEventDao extends JdbcDaoSupport {
     public ArchivedEventDao(DataSource dataSource) {this.setDataSource(dataSource);}
 
     public void createArchivedEvent(Event aEvent){
+        //should this method also delete this event from events table?
         String sqlCreateEvent ="INSERT INTO Archived_Events (event_id, event_name, event_time, event_address, admin_id) VALUE(?,?,?,?,?)";
         int eventid = aEvent.getEvent_id();
         String eventName = aEvent.getEvent_name();
