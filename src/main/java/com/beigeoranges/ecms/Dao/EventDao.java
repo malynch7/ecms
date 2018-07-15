@@ -28,7 +28,7 @@ public class EventDao extends JdbcDaoSupport {
 
     public void createEvent(Event form){
 
-        String sqlCreateEvent ="INSERT INTO Events (event_name, event_time, event_address, admin_id, event_date) VALUE(?,?,?,?,?)";
+        String sqlCreateEvent ="INSERT INTO Events (event_name, event_time, event_address, admin_id, event_date, archive) VALUE(?,?,?,?,?,0)";
         String eventName = form.getEvent_name();
         String eventTime = form.getEvent_time();
         String eventAddress = form.getEvent_address();
@@ -40,20 +40,8 @@ public class EventDao extends JdbcDaoSupport {
 
     }
 
-    public int getMaxEventId(){
-        return getJdbcTemplate().queryForObject("SELECT MAX(event_id) FROM events", Integer.class);
-
-    }
-    // The below method creates a list of all the events to be used in a dropdown menu
-    public static List<String> curEvents(){
-        String sqlAllEvents = "SELECT event_name FROM events";
-
-        eventList = jdbcTemplate.queryForList(sqlAllEvents, String.class);
-        return eventList;
-    }
-
     public List<Event> getAllEvents(){
-        String sqlGetAllEvents = "SELECT * FROM events";
+        String sqlGetAllEvents = "SELECT * FROM events WHERE archive = 0";
 
         try {
             return getJdbcTemplate().query(sqlGetAllEvents, new EventMapper());
@@ -65,7 +53,7 @@ public class EventDao extends JdbcDaoSupport {
 
 
         String sqlInvitedEventsIds = "SELECT event_id FROM registered_to WHERE RSVP = 0 AND user_id = ?";
-        String sqlInvitedEvents = "SELECT * FROM events WHERE event_id = ?";
+        String sqlInvitedEvents = "SELECT * FROM events WHERE event_id = ? AND archive = 0";
         Object[] params = new Object[] { userId };
 
         List<Integer> invitedEventsIds = getJdbcTemplate().queryForList(sqlInvitedEventsIds,params, Integer.class);
@@ -85,7 +73,7 @@ public class EventDao extends JdbcDaoSupport {
 
 
         String sqlConfirmedEventsIds = "SELECT event_id FROM registered_to WHERE RSVP = 1 AND user_id = ?";
-        String sqlConfirmedEvents = "SELECT * FROM events WHERE event_id = ?";
+        String sqlConfirmedEvents = "SELECT * FROM events WHERE event_id = ? AND archive = 0";
 
         List<Integer> confirmedEventsIds = getJdbcTemplate().queryForList(sqlConfirmedEventsIds,new Object[] { userId }, Integer.class);
 

@@ -21,28 +21,13 @@ public class ArchivedEventDao extends JdbcDaoSupport {
     public ArchivedEventDao(DataSource dataSource) {this.setDataSource(dataSource);}
 
     public void archiveEvent(Event event){
-        String sql ="INSERT INTO Archived_Events (event_id, event_name, event_time, event_address, admin_id, event_date) VALUE(?,?,?,?,?,?)";
+        String sql ="UPDATE events SET archive = 1 WHERE event_id = ?";
         int eventId = event.getEvent_id();
-        String eventName = event.getEvent_name();
-        String eventTime = event.getEvent_time();
-        String eventAddress = event.getEvent_address();
-        int adminId = event.getAdmin_id();
-        String eventDate = event.getEvent_date();
-
-        getJdbcTemplate().update(sql, eventId, eventName, eventTime, eventAddress, adminId, eventDate);
-
-        deleteEvent(event);
-    }
-
-    private void deleteEvent(Event event) {
-        String sql ="DELETE FROM events WHERE event_id = ?";
-
-        getJdbcTemplate().update(sql, event.getEvent_id());
+        getJdbcTemplate().update(sql, new Object[] {eventId});
     }
 
     public List<Event> getArchivedEvents() {
-        String sql = "SELECT * FROM Archived_Events";
-
+        String sql = "SELECT * FROM events WHERE archive = 1";
         try {
             return getJdbcTemplate().query(sql, new EventMapper());
         } catch (Exception e) {
@@ -52,7 +37,7 @@ public class ArchivedEventDao extends JdbcDaoSupport {
 
     public List<Event> getPlayersArchivedEvents(int userId) {
         String sqlArchivedEventsIds = "SELECT event_id FROM registered_to WHERE user_id = ?";
-        String sqlArchivedEvents = "SELECT * FROM archived_events WHERE event_id = ?";
+        String sqlArchivedEvents = "SELECT * FROM archived_events WHERE event_id = ? AND archive = 1";
         Object[] params = new Object[]{userId};
 
         List<Integer> archivedEventsIds = getJdbcTemplate().queryForList(sqlArchivedEventsIds, params, Integer.class);
