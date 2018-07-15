@@ -1,12 +1,11 @@
 package com.beigeoranges.ecms.Dao;
 
-import com.beigeoranges.ecms.Mapper.ArchivedMapper;
+import com.beigeoranges.ecms.Mapper.EventMapper;
 import com.beigeoranges.ecms.Model.Event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import com.beigeoranges.ecms.Model.ArchivedEvent;
 
 import javax.sql.DataSource;
 import java.util.List;
@@ -38,11 +37,11 @@ public class ArchivedEventDao extends JdbcDaoSupport {
         getJdbcTemplate().update(sql, event.getEvent_id());
     }
 
-    public List<ArchivedEvent> getArchivedEvents() {
+    public List<Event> getArchivedEvents() {
         String sql = "SELECT * FROM Archived_Events";
 
         try {
-            return getJdbcTemplate().query(sql, new ArchivedMapper());
+            return getJdbcTemplate().query(sql, new EventMapper());
         } catch (Exception e) {
             return null;
         }

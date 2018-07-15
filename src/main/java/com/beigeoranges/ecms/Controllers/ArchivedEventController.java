@@ -3,7 +3,6 @@ package com.beigeoranges.ecms.Controllers;
 import com.beigeoranges.ecms.Dao.ArchivedEventDao;
 import com.beigeoranges.ecms.Dao.EventDao;
 import com.beigeoranges.ecms.Dao.UserDao;
-import com.beigeoranges.ecms.Model.ArchivedEvent;
 import com.beigeoranges.ecms.Model.Event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,7 +27,7 @@ public class ArchivedEventController {
 
     @RequestMapping(value = "admin/archiveEvent", method = RequestMethod.GET)
     public String viewArchiveEventPage(Model model) {
-        ArchivedEvent aEvent = new ArchivedEvent();
+        Event aEvent = new Event();
         List<String> curEvents = eventDao.curEvents();
         model.addAttribute("Events", curEvents);
         return "admin/archiveEvent";
@@ -40,7 +39,7 @@ public class ArchivedEventController {
         String userName = principal.getName();
         int userId = Math.toIntExact((userDao.findUserAccount(userName)).getUserId());
 
-        List<ArchivedEvent> archivedEvents = archivedEventDao.getArchivedEvents();
+        List<Event> archivedEvents = archivedEventDao.getArchivedEvents();
         model.addAttribute("archivedEvents", archivedEvents);
 
         return "player/viewArchived";
