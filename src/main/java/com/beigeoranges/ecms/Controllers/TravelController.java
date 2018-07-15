@@ -32,7 +32,6 @@ public class TravelController {
 
         // Validate result
         if (result.hasErrors()) {
-            //     System.out.println("Error in if");
             return "admin/createTravel";
         }
         try {

@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
+import java.security.Signature;
 import java.util.List;
 
 @Controller
@@ -38,24 +39,21 @@ public class EventController {
     }
 
     @RequestMapping(value = "/admin/createEvent", method = RequestMethod.POST)
-    public String saveEvent(Model model, Principal principal, @ModelAttribute(value="event") Event event, BindingResult result) {
+    public String saveEvent(Model model, Principal principal, @ModelAttribute(value = "event") Event event, BindingResult result) {
 
         // Validate result
         if (result.hasErrors()) {
-       //     System.out.println("Error in if");
             return "admin/createEvent";
         }
         try {
             String username = principal.getName();
             event.setAdmin_id(userDao.getUserIdByEmail(username));
             eventDao.createEvent(event);
-         //   System.out.println("try");
 
         }
         // Other error!!
         catch (Exception e) {
             model.addAttribute("errorMessage", "Error: " + e.getMessage());
-        //    System.out.println("Error in catch");
 
             return "admin/createEvent";
         }
@@ -78,11 +76,22 @@ public class EventController {
     }
 
     @RequestMapping(value = "/admin/EventSelected", method = RequestMethod.POST)
-    public String InvitePlayer(@RequestParam("id") String eventid, Model model, @RequestAttribute("Uninvited") User player) {
+    public String InvitePlayer(Model model, @ModelAttribute(value = "invite") String email, BindingResult result) {
 
+        // Validate result
+        if (result.hasErrors()) {
+            return "admin/EventSelected";
+        }
+        try {
+            eventDao.Invite(1,userDao.getUserIdByEmail(email));
 
+        }
+        // Other error!!
+        catch (Exception e) {
+            model.addAttribute("errorMessage", "Error: " + e.getMessage());
+
+            return "admin/EventSelected";
+        }
         return "redirect:/admin/EventSelected";
     }
-
-
-    }
+}

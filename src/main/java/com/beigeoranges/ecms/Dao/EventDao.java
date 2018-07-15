@@ -98,5 +98,10 @@ public class EventDao extends JdbcDaoSupport {
         String sql = "UPDATE registered_to SET RSVP = 1 WHERE event_id = ? AND user_id = ?";
         getJdbcTemplate().update(sql, new Object[] {eventId, userId});
     }
+
+    public void Invite(int eventId, int userId){
+        String sql = "INSERT INTO registered_to(event_id, user_id, RSVP) VALUES (?,?,?)";
+        getJdbcTemplate().update(sql, new Object[] {eventId, userId}, 0);
+    }
 }
 
