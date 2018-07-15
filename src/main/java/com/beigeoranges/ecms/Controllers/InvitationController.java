@@ -27,27 +27,17 @@ public class InvitationController {
     @Autowired
     private UserDao userDao;
 
-    @Autowired
-    private ProfileValidator profileValidator;
-
-    @InitBinder
-    protected void initBinder(WebDataBinder dataBinder) {
-
-      return;
-
-    }
-
 
     @RequestMapping(value = "/admin/invite", method = RequestMethod.POST)
     public String InvitePlayer(Model model, @ModelAttribute("invitation") Invitation invitation) {
 
-        eventDao.Invite(invitation.getEvent().getEvent_id(),userDao.getUserIdByEmail(invitation.getEmail()));
-        model.addAttribute("event", invitation.getEvent());
+        eventDao.Invite(invitation.getEventId(),userDao.getUserIdByEmail(invitation.getEmail()));
+        model.addAttribute("event", eventDao.getEventById(invitation.getEventId()));
 
-        List<User> invitedPlayers = userDao.getInvitedPlayers(invitation.getEvent().getEvent_id());
+        List<User> invitedPlayers = userDao.getInvitedPlayers(invitation.getEventId());
         model.addAttribute("invitedPlayers", invitedPlayers);
 
-        List<User> confirmedPlayers = userDao.getConfirmedPlayers(invitation.getEvent().getEvent_id());
+        List<User> confirmedPlayers = userDao.getConfirmedPlayers(invitation.getEventId());
         model.addAttribute("confirmedPlayers", confirmedPlayers);
 
         model.addAttribute("travelForm", new TravelForm());

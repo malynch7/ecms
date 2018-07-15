@@ -2,25 +2,18 @@ package com.beigeoranges.ecms.Model;
 
 public class Invitation {
 
-    private Event event;
+    private int eventId;
     private String email;
 
     public Invitation() {
 
     }
 
-    public Invitation(Event event, String email) {
-        this.event = event;
+    public Invitation(int eventId, String email) {
+        this.eventId = eventId;
         this.email = email;
     }
 
-    public Event getEvent() {
-        return event;
-    }
-
-    public void setEvent(Event event) {
-        this.event = event;
-    }
 
     public String getEmail() {
         return email;
@@ -28,5 +21,13 @@ public class Invitation {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public int getEventId() {
+        return eventId;
+    }
+
+    public void setEventId(int eventId) {
+        this.eventId = eventId;
     }
 }
