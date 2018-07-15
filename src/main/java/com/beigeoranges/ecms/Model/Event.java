@@ -1,7 +1,5 @@
 package com.beigeoranges.ecms.Model;
 
-import java.util.List;
-
 public class Event {
     private int event_id;
     private String event_name;

@@ -40,7 +40,7 @@ public class ArchivedEventController {
         String userName = principal.getName();
         int userId = Math.toIntExact((userDao.findUserAccount(userName)).getUserId());
 
-        List<Event> archivedEvents = archivedEventDao.getArchivedEvents(userId);
+        List<ArchivedEvent> archivedEvents = archivedEventDao.getArchivedEvents();
         model.addAttribute("archivedEvents", archivedEvents);
 
         return "player/viewArchived";

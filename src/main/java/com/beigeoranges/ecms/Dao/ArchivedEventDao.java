@@ -1,57 +1,50 @@
 package com.beigeoranges.ecms.Dao;
 
-import com.beigeoranges.ecms.Mapper.EventMapper;
+import com.beigeoranges.ecms.Mapper.ArchivedMapper;
 import com.beigeoranges.ecms.Model.Event;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import com.beigeoranges.ecms.Model.ArchivedEvent;
 
 import javax.sql.DataSource;
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
 @Transactional
 public class ArchivedEventDao extends JdbcDaoSupport {
 
-    //SQL Queries
     @Autowired
     public ArchivedEventDao(DataSource dataSource) {this.setDataSource(dataSource);}
 
-    public void createArchivedEvent(Event aEvent){
-        String sqlCreateEvent ="INSERT INTO Archived_Events (event_id, event_name, event_time, event_address, admin_id, event_date) VALUE(?,?,?,?,?,?)";
-        int eventid = aEvent.getEvent_id();
-        String eventName = aEvent.getEvent_name();
-        String eventTime = aEvent.getEvent_time();
-        String eventAddress = aEvent.getEvent_address();
-        int adminId = aEvent.getAdmin_id();
-        String eventDate = aEvent.getEvent_date();
+    public void createArchivedEvent(Event event){
+        String sql ="INSERT INTO Archived_Events (event_id, event_name, event_time, event_address, admin_id, event_date) VALUE(?,?,?,?,?,?)";
+        int eventId = event.getEvent_id();
+        String eventName = event.getEvent_name();
+        String eventTime = event.getEvent_time();
+        String eventAddress = event.getEvent_address();
+        int adminId = event.getAdmin_id();
+        String eventDate = event.getEvent_date();
 
-        getJdbcTemplate().update(sqlCreateEvent, eventid, eventName, eventTime, eventAddress, adminId);
+        getJdbcTemplate().update(sql, eventId, eventName, eventTime, eventAddress, adminId, eventDate);
 
+        deleteEvent(event);
     }
 
-    public List<Event> getArchivedEvents(int userId){
-        String sqlArchivedEventsIds = "SELECT event_id FROM registered_to WHERE user_id = ?";
-        String sqlArchivedEvents = "SELECT * FROM archived_events WHERE event_id = ?";
-        Object[] params = new Object[] { userId };
+    private void deleteEvent(Event event) {
+        String sql ="DELETE FROM events WHERE event_id = ?";
 
-        List<Integer> archivedEventsIds = getJdbcTemplate().queryForList(sqlArchivedEventsIds,params, Integer.class);
+        getJdbcTemplate().update(sql, event.getEvent_id());
+    }
 
-        List<Event> archivedEvents = new ArrayList<>();
-        EventMapper mapper = new EventMapper();
+    public List<ArchivedEvent> getArchivedEvents() {
+        String sql = "SELECT * FROM Archived_Events";
 
-        for(int eventId : archivedEventsIds){
-            try {
-                archivedEvents.add(getJdbcTemplate().queryForObject(sqlArchivedEvents, new Object[]{eventId}, mapper));
-
-            } catch (EmptyResultDataAccessException e) {
-
-            }
+        try {
+            return getJdbcTemplate().query(sql, new ArchivedMapper());
+        } catch (Exception e) {
+            return null;
         }
-        return archivedEvents;
     }
 }

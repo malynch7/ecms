@@ -1,44 +1,28 @@
 package com.beigeoranges.ecms.Model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-
-@Entity
-@Table(name = "Events")
 public class ArchivedEvent {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    //@Column(name = "id") //not sure about this line
-    @JsonIgnore
-
-    @NotBlank(message = "Empty")
-    @Column(name = "Events", nullable = false)
-
-    //getters and setters
     private int event_id;
     private String event_name;
     private String event_time;
     private String event_address;
     private int admin_id;
-    // to be added
-    //private String handbook_file_path;
+    private String event_date;
 
-    public ArchivedEvent(){}
 
-    public ArchivedEvent(Event anEvent){
-        event_id = anEvent.getEvent_id();
-        event_name = anEvent.getEvent_name();
-        event_time = anEvent.getEvent_time();
-        event_address = anEvent.getEvent_time();
-        admin_id = anEvent.getAdmin_id();
-        // add to constructor as well
-        //this.handbook_file_path = handbook_file_path;
+    public ArchivedEvent() {
+    }
+
+    public ArchivedEvent(int event_id, String event_name, String event_time, String event_address, int admin_id, String event_date) {
+        this.event_id = event_id;
+        this.event_name = event_name;
+        this.event_time = event_time;
+        this.event_address = event_address;
+        this.admin_id = admin_id;
+        this.event_date = event_date;
 
     }
 
-    /*public int getAdmin_id() {
+    public int getAdmin_id() {
         return admin_id;
     }
 
@@ -76,7 +60,13 @@ public class ArchivedEvent {
 
     public void setEvent_address(String event_address) {
         this.event_address = event_address;
-    }*/
+    }
 
+    public String getEvent_date() {
+        return event_date;
+    }
 
+    public void setEvent_date(String event_date) {
+        this.event_date = event_date;
+    }
 }
