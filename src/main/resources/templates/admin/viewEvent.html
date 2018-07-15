@@ -94,7 +94,7 @@
                 </li>
                 <li class="list-group-item">
                     <form th:align="center" th:action="@{/admin/invite}" th:object="${invitation}" method="post">
-                        <input type="text" class="form-control mb-2 mr-sm-2" placeholder="Email">
+                        <input type="text" class="form-control mb-2 mr-sm-2" th:field="*{email}"  placeholder="Email">
                         <input type="hidden" th:value="${event}" th:name="event">
                         <button type="submit" class="btn btn-secondary mb-2">Invite</button>
                     </form>
