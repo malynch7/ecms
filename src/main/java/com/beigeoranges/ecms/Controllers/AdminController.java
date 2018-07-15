@@ -144,10 +144,19 @@ public class AdminController {
     @RequestMapping(value = "/admin/invite", method = RequestMethod.POST)
     public String InvitePlayer(Model model, @ModelAttribute("invitation") Invitation invitation) {
 
-            eventDao.Invite(invitation.getEvent().getEvent_id(),userDao.getUserIdByEmail(invitation.getEmail()));
-            model.addAttribute("event", invitation.getEvent());
+        eventDao.Invite(invitation.getEvent().getEvent_id(),userDao.getUserIdByEmail(invitation.getEmail()));
+        model.addAttribute("event", invitation.getEvent());
 
-        return "redirect:/admin/viewEvent";
+        List<User> invitedPlayers = userDao.getInvitedPlayers(invitation.getEvent().getEvent_id());
+        model.addAttribute("invitedPlayers", invitedPlayers);
+
+        List<User> confirmedPlayers = userDao.getConfirmedPlayers(invitation.getEvent().getEvent_id());
+        model.addAttribute("confirmedPlayers", confirmedPlayers);
+
+        model.addAttribute("travelForm", new TravelForm());
+        model.addAttribute("invitation", new Invitation());
+
+        return "/admin/viewEvent";
     }
 
     @RequestMapping(value = "/admin/createTravel", method = RequestMethod.POST)
