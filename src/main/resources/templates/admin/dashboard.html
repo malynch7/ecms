@@ -30,9 +30,10 @@
             <ul class="list-group">
                 <li th:align="center" class="list-group-item active"><h3>Events</h3></li>
                 <li class="list-group-item" th:if="${events.isEmpty()}" th:align="center">You have no active events</li>
+                <li class="list-group-item">
                 <th:block th:each="event : ${events}">
-                    <li class="list-group-item">
-                        <table class="table borderless">
+
+                        <table class="table">
                             <tr>
                                 <td>
                                     <form th:action="@{/admin/viewEvent}" th:object="${event}" method="post">
@@ -56,10 +57,10 @@
                                         <button type="submit" class="btn btn-secondary">Archive</button>
                                     </form>
                                 </td>
-
                             </tr>
                         </table>
                 </th:block>
+                </li>
             </ul>
         </div>
         <div class="col-md-1"></div>
