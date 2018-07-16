@@ -29,7 +29,7 @@ public class EventDao extends JdbcDaoSupport {
 
     public void createEvent(Event form){
 
-        String sqlCreateEvent ="INSERT INTO Events (event_name, event_time, event_address, admin_id, event_date, archive) VALUE(?,?,?,?,?,0)";
+        String sqlCreateEvent ="INSERT INTO events (event_name, event_time, event_address, admin_id, event_date, archive) VALUE(?,?,?,?,?,0)";
         String eventName = form.getEvent_name();
         String eventTime = form.getEvent_time();
         String eventAddress = form.getEvent_address();
@@ -106,7 +106,6 @@ public class EventDao extends JdbcDaoSupport {
     }
 
     public void Invite(int eventId, int userId){
-        int eventid;
 
         String sqlCheck = "SELECT RSVP FROM registered_to WHERE event_id = ? AND user_id = ?";
         int result;

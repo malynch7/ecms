@@ -25,14 +25,8 @@ public class IndexController {
     @Autowired
     private EventDao eventDao;
 
-    @RequestMapping(value = {"/"}, method = RequestMethod.GET)
-    public String welcomePage(Model model) {
-        model.addAttribute("title", "Welcome");
-        model.addAttribute("message", "This is welcome page!");
-        return "index";
-    }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = {"/login", "/"}, method = RequestMethod.GET)
     public String loginPage(Model model) {
 
         return "login";
