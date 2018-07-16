@@ -32,13 +32,6 @@ public class IndexController {
         return "login";
     }
 
-    @RequestMapping(value = "/logoutSuccessful", method = RequestMethod.GET)
-    public String logoutSuccessfulPage(Model model) {
-        model.addAttribute("title", "Logout");
-        return "logoutSuccessful";
-    }
-
-
     @RequestMapping(value = "/error/access-denied", method = RequestMethod.GET)
     public String accessDenied(Model model, Principal principal) {
 

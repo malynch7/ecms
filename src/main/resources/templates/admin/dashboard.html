@@ -32,7 +32,7 @@
                 <li class="list-group-item" th:if="${events.isEmpty()}" th:align="center">You have no active events</li>
                 <th:block th:each="event : ${events}">
                     <li class="list-group-item">
-                        <table class="table">
+                        <table class="table borderless">
                             <tr>
                                 <td>
                                     <form th:action="@{/admin/viewEvent}" th:object="${event}" method="post">
