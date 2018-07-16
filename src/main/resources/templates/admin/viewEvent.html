@@ -110,8 +110,8 @@
                         </tr>
                         <th:block th:each="player : ${invitedPlayers}">
                             <tr>
-                                <td th:text="${player.getFirstName()}"></td>
                                 <td th:text="${player.getLastName()}"></td>
+                                <td th:text="${player.getFirstName()}"></td>
                                 <td th:text="${player.getEmail()}"></td>
                             </tr>
                         </th:block>

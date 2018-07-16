@@ -1,6 +1,7 @@
 package com.beigeoranges.ecms.Dao;
 
 import com.beigeoranges.ecms.Mapper.EventMapper;
+import com.beigeoranges.ecms.Mapper.UserMapper;
 import com.beigeoranges.ecms.Model.Event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -109,11 +110,13 @@ public class EventDao extends JdbcDaoSupport {
 
         String sqlCheck = "SELECT RSVP FROM registered_to WHERE event_id = ? AND user_id = ?";
         int result;
+
         try {
             result = getJdbcTemplate().queryForObject(sqlCheck, new Object[] {eventId, userId}, Integer.class);
         } catch (EmptyResultDataAccessException e) {
-            result=5;
+            result=3;
         }
+
         if(result != 0 && result != 1){
             String sql = "INSERT INTO registered_to(event_id, user_id, RSVP) VALUES (?,?,?)";
             getJdbcTemplate().update(sql, new Object[] {eventId, userId, 0});

@@ -26,7 +26,7 @@ public class TravelDao extends JdbcDaoSupport {
 
     public void createFlight(TravelForm form){
 
-        String sqlCreateFlight ="INSERT INTO Travel_Information (flight_airline, flight_depart, flight_arrival, arrival_terminal, flight_confirmation, user_id, event_id, departure_terminal) VALUE(?,?,?,?,?,?,?,?)";
+        String sqlCreateFlight ="INSERT INTO travel_information (flight_airline, flight_depart, flight_arrival, arrival_terminal, flight_confirmation, user_id, event_id, departure_terminal) VALUE(?,?,?,?,?,?,?,?)";
         String flightAirline = form.getAirline();
         String flightDepart = form.getDepartureTime();
         String flightArrival = form.getArrivalTime();
@@ -36,9 +36,11 @@ public class TravelDao extends JdbcDaoSupport {
         int eventId = form.getEventId();
         String departureTerminal = form.getDepartureTerminal();
 
+        try{
+            getJdbcTemplate().update(sqlCreateFlight, flightAirline, flightDepart, flightArrival, arrivalTerminal, flightConfirmation, userId, eventId, departureTerminal);
+        }catch(EmptyResultDataAccessException e){
 
-        getJdbcTemplate().update(sqlCreateFlight, flightAirline, flightDepart, flightArrival, arrivalTerminal, flightConfirmation, userId, eventId, departureTerminal);
-
+        }
     }
     public TravelForm getTravelInfo(int eventid, int userid){
 
