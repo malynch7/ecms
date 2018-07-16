@@ -155,7 +155,7 @@ public class AdminController {
          travelDao.createFlight(travelForm);
 
          eventDao.getEventById(travelForm.getEventId());
-        model.addAttribute("event", eventDao.getEventById(travelForm.getEventId()));
+         model.addAttribute("event", eventDao.getEventById(travelForm.getEventId()));
 
         List<User> invitedPlayers = userDao.getInvitedPlayers(travelForm.getEventId());
         model.addAttribute("invitedPlayers", invitedPlayers);
