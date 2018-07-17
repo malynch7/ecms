@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.ResultSet;
+import java.util.Comparator;
 import java.util.List;
 
 @Repository
@@ -77,20 +78,27 @@ public class UserDao extends JdbcDaoSupport {
     }
 
     public List<User> getInvitedPlayers(int eventId){
-        String sqlGetInvitedUsers = "SELECT users.* FROM users, registered_to WHERE registered_to.event_id = '" + eventId  + "' AND registered_to.user_id = users.user_id AND RSVP = 0";
+        String sqlGetInvitedUsers = "SELECT users.* FROM users, registered_to WHERE registered_to.event_id = '"
+                + eventId  + "' AND registered_to.user_id = users.user_id AND RSVP = 0";
 
         try {
-            return getJdbcTemplate().query(sqlGetInvitedUsers, new UserMapper());
+            List<User> invitedPlayers = getJdbcTemplate().query(sqlGetInvitedUsers, new UserMapper());
+            invitedPlayers.sort(Comparator.comparing(User::compString));
+            return invitedPlayers;
         } catch (Exception e) {
             return null;
         }
     }
 
     public List<User> getConfirmedPlayers(int eventId){
-        String sqlGetRSVPUsers = "SELECT users.* FROM users, registered_to WHERE registered_to.event_id = '" + eventId  + "' AND registered_to.user_id = users.user_id AND RSVP = 1";
+        String sqlGetRSVPUsers = "SELECT users.* FROM users, registered_to WHERE registered_to.event_id = '" + eventId
+                + "' AND registered_to.user_id = users.user_id AND RSVP = 1";
 
         try {
-            return getJdbcTemplate().query(sqlGetRSVPUsers, new UserMapper());
+            List<User> confirmedPlayers = getJdbcTemplate().query(sqlGetRSVPUsers, new UserMapper());
+            confirmedPlayers.sort(Comparator.comparing(User::compString));
+            return confirmedPlayers;
+
         } catch (Exception e) {
             return null;
         }

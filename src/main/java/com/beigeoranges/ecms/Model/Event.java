@@ -1,5 +1,7 @@
 package com.beigeoranges.ecms.Model;
 
+import java.util.Date;
+
 public class Event {
     private int event_id;
     private String event_name;
@@ -67,10 +69,14 @@ public class Event {
 
 
     public String getEvent_date() {
-        return event_date;
-    }
+        return event_date; }
 
     public void setEvent_date(String event_date) {
         this.event_date = event_date;
     }
+
+    public Date toDateObject(){
+        return new Date(event_date);
+    }
+
 }

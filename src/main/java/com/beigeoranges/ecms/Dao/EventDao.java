@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Repository
@@ -46,7 +47,9 @@ public class EventDao extends JdbcDaoSupport {
         String sqlGetAllEvents = "SELECT * FROM events WHERE archive = 0";
 
         try {
-            return getJdbcTemplate().query(sqlGetAllEvents, new EventMapper());
+            List<Event> events = getJdbcTemplate().query(sqlGetAllEvents, new EventMapper());
+            events.sort(Comparator.comparing(Event::toDateObject));
+            return events;
         } catch (Exception e) {
             return null;
         }
@@ -73,7 +76,7 @@ public class EventDao extends JdbcDaoSupport {
 
             }
         }
-        System.out.println(invitedEvents.toString());
+        invitedEvents.sort(Comparator.comparing(Event::toDateObject));
         return invitedEvents;
     }
 
@@ -97,7 +100,7 @@ public class EventDao extends JdbcDaoSupport {
 
             }
         }
-        System.out.println(confirmedEvents.toString());
+        confirmedEvents.sort(Comparator.comparing(Event::toDateObject));
         return confirmedEvents;
     }
 
