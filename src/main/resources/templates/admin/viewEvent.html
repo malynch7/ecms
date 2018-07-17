@@ -47,12 +47,11 @@
                 </li>
             </ul>
         </div>
-        <div class="col-md-6"><!-- Confirmed players -->
+        <div class="col-md-5"><!-- Confirmed players -->
             <ul class="list-group">
                 <li th:align="center" class="list-group-item active" >
                     <h2>Confirmed Players</h2>
                 </li>
-                <li class="list-group-item">
                 <li class="list-group-item" th:if="${confirmedPlayers.isEmpty()}" th:align="center">You have not confirmed any players</li>
                 <li class="list-group-item" th:if="${!confirmedPlayers.isEmpty()}">
                     <table class="table" >
@@ -87,7 +86,7 @@
                 </li>
             </ul>
         </div>
-        <div class="col-md-3"><!-- Invited players -->
+        <div class="col-md-4"><!-- Invited players -->
             <ul class="list-group">
                 <li th:align="center" class="list-group-item active" >
                     <h2>Invited Players</h2>
@@ -101,10 +100,10 @@
                 </li>
                 <li class="list-group-item" th:if="${invitedPlayers.isEmpty()}" th:align="center">You do not have any open invitations</li>
                 <li class="list-group-item" th:if="${!invitedPlayers.isEmpty()}">
-                    <table class="table-sm" >
+                    <table class="table" >
                         <tr>
-                            <th>Last name</th>
-                            <th>First name</th>
+                            <th>Last</th>
+                            <th>First</th>
                             <th>Email</th>
                             <td></td>
                         </tr>
