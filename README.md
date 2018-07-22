@@ -41,6 +41,7 @@ To deploy the application, we chose Amazon Web Services (AWS) to host our applic
 
 4. Now you can log in using the account you just created and you will be directed to the dashboard for your user type, admin or player. 
 
+<br>
 <h5>Admin Create Event/Invite Player:</h5>
 
 1. On the admin dashboard, pictured below, click on “Create Event” to be directed to the Create Event page. 
@@ -61,6 +62,7 @@ To deploy the application, we chose Amazon Web Services (AWS) to host our applic
 
 5. Once a player logs in to their dashboard and confirms their attendance, they will be moved from the “Invited Players” list, to the “Confirmed Players” list on the event page. 
 
+<br>
 <h5>Player Confirm Attendance/View Past Events:</h5>
 
 1. Once you are logged in as a player, you will be directed to your player dashboard, pictured below, where you can view your “Confirmed Events”, “Invited Events” and “Event History”. 
