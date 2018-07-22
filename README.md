@@ -33,7 +33,7 @@ To deploy the application, we chose Amazon Web Services (AWS) to host our applic
 
 2. To register for an account, click here on the home page:
 
-![alt text](images/1_login.png)
+![alt text](images/1_login.PNG)
 
 3. You will register for an account. If you are an administrator for your company, make sure you have your company’s admin code, otherwise you will be registered as a player. If you are a player, leave the “Admin Code” box blank. 
 
