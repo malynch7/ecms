@@ -33,11 +33,11 @@ To deploy the application, we chose Amazon Web Services (AWS) to host our applic
 
 2. To register for an account, click here on the home page:
 
-![alt text](images/1_login.PNG)
+![login](images/1_login.PNG)
 
 3. You will register for an account. If you are an administrator for your company, make sure you have your company’s admin code, otherwise you will be registered as a player. If you are a player, leave the “Admin Code” box blank. 
 
-![alt text](images/2_registration.PNG)
+![registration](images/2_registration.PNG)
 
 4. Now you can log in using the account you just created and you will be directed to the dashboard for your user type, admin or player. 
 
@@ -45,19 +45,19 @@ To deploy the application, we chose Amazon Web Services (AWS) to host our applic
 
 1. On the admin dashboard, pictured below, click on “Create Event” to be directed to the Create Event page. 
 
-![alt text](images/3_createEvent.PNG)
+![create event](images/3_createEvent.PNG)
 
 2. To create an event, simply enter all the required fields, pictured below, and click submit to create the event. 
 
-![alt text](images/4_eventForm.PNG)
+![event form](images/4_eventForm.PNG)
 
 3. Once you submit the event, you will be redirected to the dashboard where you new event will be listed with the other events, based on chronological order. Click on the event to add players to the event. 
 
-![alt text](images/5_selectEvent.PNG)
+![event selection](images/5_selectEvent.PNG)
 
 4. On the right hand side of the “View Event” page, you will see the list of “Invited Players”. To add a player to the event, simply add their email address and click “Invite” and they will be notified they have been invited to the event. 
 
-![alt text](images/6_invite.PNG)
+![invite](images/6_invite.PNG)
 
 5. Once a player logs in to their dashboard and confirms their attendance, they will be moved from the “Invited Players” list, to the “Confirmed Players” list on the event page. 
 
@@ -65,15 +65,15 @@ To deploy the application, we chose Amazon Web Services (AWS) to host our applic
 
 1. Once you are logged in as a player, you will be directed to your player dashboard, pictured below, where you can view your “Confirmed Events”, “Invited Events” and “Event History”. 
 
-![alt text](images/7_playerDashboard.PNG)
+![player dashboard](images/7_playerDashboard.PNG)
 
 2. To view an event, select an event on your “Invited Events” list and you will be directed to the “View Event” page for that event where you will be able to view the information about the event as well as confirm your attendance. To confirm your attendance, simply click on the “Confirm Attendance” button and the event will be moved to your list of “Confirmed Events”.
 
-![alt text](images/8_confirmAttendance.PNG)
+![confirm Attendance](images/8_confirmAttendance.PNG)
 
 3. To view your past events, simply click on the “Event History” button on your dashboard and you will be directed to a page with a table listing your event history, an example is pictured below.
 
-![alt text](images/9_eventHistory.PNG)
+![event history](images/9_eventHistory.PNG)
 
 
 <h3>Development Team</h3>
