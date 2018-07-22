@@ -1,6 +1,7 @@
 package com.beigeoranges.ecms.Dao;
 
 import com.beigeoranges.ecms.Mapper.EventMapper;
+import com.beigeoranges.ecms.Mapper.UserMapper;
 import com.beigeoranges.ecms.Model.Event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Repository
@@ -45,7 +47,9 @@ public class EventDao extends JdbcDaoSupport {
         String sqlGetAllEvents = "SELECT * FROM events WHERE archive = 0";
 
         try {
-            return getJdbcTemplate().query(sqlGetAllEvents, new EventMapper());
+            List<Event> events = getJdbcTemplate().query(sqlGetAllEvents, new EventMapper());
+            events.sort(Comparator.comparing(Event::toDateObject));
+            return events;
         } catch (Exception e) {
             return null;
         }
@@ -72,7 +76,7 @@ public class EventDao extends JdbcDaoSupport {
 
             }
         }
-        System.out.println(invitedEvents.toString());
+        invitedEvents.sort(Comparator.comparing(Event::toDateObject));
         return invitedEvents;
     }
 
@@ -96,7 +100,7 @@ public class EventDao extends JdbcDaoSupport {
 
             }
         }
-        System.out.println(confirmedEvents.toString());
+        confirmedEvents.sort(Comparator.comparing(Event::toDateObject));
         return confirmedEvents;
     }
 
@@ -109,11 +113,13 @@ public class EventDao extends JdbcDaoSupport {
 
         String sqlCheck = "SELECT RSVP FROM registered_to WHERE event_id = ? AND user_id = ?";
         int result;
+
         try {
             result = getJdbcTemplate().queryForObject(sqlCheck, new Object[] {eventId, userId}, Integer.class);
         } catch (EmptyResultDataAccessException e) {
-            result=5;
+            result=3;
         }
+
         if(result != 0 && result != 1){
             String sql = "INSERT INTO registered_to(event_id, user_id, RSVP) VALUES (?,?,?)";
             getJdbcTemplate().update(sql, new Object[] {eventId, userId, 0});

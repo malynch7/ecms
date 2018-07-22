@@ -11,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Repository
@@ -29,10 +31,14 @@ public class ArchivedEventDao extends JdbcDaoSupport {
     public List<Event> getArchivedEvents() {
         String sql = "SELECT * FROM events WHERE archive = 1";
         try {
-            return getJdbcTemplate().query(sql, new EventMapper());
+            List<Event> archivedEvents = getJdbcTemplate().query(sql, new EventMapper());
+            archivedEvents.sort(Comparator.comparing(Event::toDateObject));
+            Collections.reverse(archivedEvents);
+            return archivedEvents;
         } catch (Exception e) {
             return null;
         }
+
     }
 
     public List<Event> getPlayersArchivedEvents(int userId) {
@@ -53,6 +59,8 @@ public class ArchivedEventDao extends JdbcDaoSupport {
 
             }
         }
+        archivedEvents.sort(Comparator.comparing(Event::toDateObject));
+        Collections.reverse(archivedEvents);
         return archivedEvents;
     }
 }

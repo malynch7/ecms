@@ -36,7 +36,10 @@
                         <table class="table">
                             <tr>
                                 <td>
-                                    <form th:action="@{/admin/viewEvent}" th:object="${event}" method="post">
+                                    <p th:text="${event.event_date}"></p>
+                                </td>
+                                <td>
+                                    <form th:align="center" th:action="@{/admin/viewEvent}" th:object="${event}" method="post">
                                         <input type="hidden" th:value="*{event_id}" name="event_id" />
                                         <input type="hidden" th:value="*{event_name}" name="event_name" />
                                         <input type="hidden" th:value="*{event_time}" name="event_time" />

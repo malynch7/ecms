@@ -31,7 +31,11 @@ public class InvitationController {
     @RequestMapping(value = "/admin/invite", method = RequestMethod.POST)
     public String InvitePlayer(Model model, @ModelAttribute("invitation") Invitation invitation) {
 
-        eventDao.Invite(invitation.getEventId(),userDao.getUserIdByEmail(invitation.getEmail()));
+
+        User user = userDao.findUserAccount(invitation.getEmail());
+        if(user != null){
+            eventDao.Invite(invitation.getEventId(),Math.toIntExact(user.getUserId()));
+        }
         model.addAttribute("event", eventDao.getEventById(invitation.getEventId()));
 
         List<User> invitedPlayers = userDao.getInvitedPlayers(invitation.getEventId());

@@ -68,5 +68,9 @@ public class User {
         this.firstName = firstName;
     }
 
+    public String compString(){
+        return lastName + firstName + email;
+    }
+
 
 }
