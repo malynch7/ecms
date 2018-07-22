@@ -65,7 +65,7 @@ To deploy the application, we chose Amazon Web Services (AWS) to host our applic
 
 1. Once you are logged in as a player, you will be directed to your player dashboard, pictured below, where you can view your “Confirmed Events”, “Invited Events” and “Event History”. 
 
-<img align="center" src="7_playerDashboard.PNG" width="700">
+<img align="center" src="images/7_playerDashboard.PNG" width="700">
 
 2. To view an event, select an event on your “Invited Events” list and you will be directed to the “View Event” page for that event where you will be able to view the information about the event as well as confirm your attendance. To confirm your attendance, simply click on the “Confirm Attendance” button and the event will be moved to your list of “Confirmed Events”.
 
