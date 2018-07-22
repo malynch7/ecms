@@ -27,13 +27,13 @@ To deploy the application, we chose Amazon Web Services (AWS) to host our applic
 
 <h3>User Guide</h3>
 
-Sign Up/Log In:
+<h5>Sign Up/Log In:</h5>
 
 1. Once you arrive at the landing page, you will be directed to log in or register for an account. 
 
 2. To register for an account, click here on the home page:
 
-![alt text](images/1_login.PNG)
+![alt text](images/1_login.png)
 
 3. You will register for an account. If you are an administrator for your company, make sure you have your company’s admin code, otherwise you will be registered as a player. If you are a player, leave the “Admin Code” box blank. 
 
@@ -41,7 +41,7 @@ Sign Up/Log In:
 
 4. Now you can log in using the account you just created and you will be directed to the dashboard for your user type, admin or player. 
 
-Admin Create Event/Invite Player:
+<h5>Admin Create Event/Invite Player:</h5>
 
 1. On the admin dashboard, pictured below, click on “Create Event” to be directed to the Create Event page. 
 
@@ -61,7 +61,7 @@ Admin Create Event/Invite Player:
 
 5. Once a player logs in to their dashboard and confirms their attendance, they will be moved from the “Invited Players” list, to the “Confirmed Players” list on the event page. 
 
-Player Confirm Attendance/View Past Events:
+<h5>Player Confirm Attendance/View Past Events:</h5>
 
 1. Once you are logged in as a player, you will be directed to your player dashboard, pictured below, where you can view your “Confirmed Events”, “Invited Events” and “Event History”. 
 
