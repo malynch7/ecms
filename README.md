@@ -1,4 +1,4 @@
-# ecms
+# ECMS
 
 <h3>Project Summary</h3>
 
@@ -13,6 +13,17 @@ Now, on the admin’s side, the software will be able to access player’s and e
 This will help companies to save on cost with how much time it would cost to employ multiple people to do a job that could be done by two. Also it is a software that can be utilized in not only the esports production side, but other businesses that want to do in house travel for clients and businesses. Making it simple and easy to use by both parties.
 
 We are confident that the system can be built utilizing Java with the IntelliJ IDEA, mySQL to handle the database, and HTML to design the front-end experience. Our group has considered the time limitation and the collective knowledge and experience of our group members when deciding to build this project, and we are very confident that we will be able to deliver. The project will be an exciting way for our team to experience designing a modern web application as well as learning new implementation, design, and integration techniques.
+
+<h3>Development Tools</h3>
+
+When it came time to implement our design, we first had to pick IntelliJ IDEA as our Integrated Development Environment (IDE). We chose IntelliJ because it is feature rich and widely used in the market for Java. Since Java is the language most of us are familiar with, we chose Spring Boot, a popular Java-based framework for building web applications. We chose Spring because it provides a wide variety of features that we could pick and choose as best suited our needs.
+ 
+Along with Spring Boot, we included several Maven dependencies. We used thymeleaf, which enabled us to use raw HTML for the front end as opposed to creating JavaServer Pages. Because we were using raw HTML, we were able to use Bootstrap, a front-end component library, to create clean, responsive, and modern pages. 
+
+For our Relational Database Management System, we chose MySQL because it is open source and we have group members with experience working with it. 
+
+To deploy the application, we chose Amazon Web Services (AWS) to host our application and our database. We chose AWS because of it is a widely used tool for web hosting, and the process to upload and maintain the application was painless and did not require us to download or learn any difficult software. 
+
 
 <h3>User Guide</h3>
 
