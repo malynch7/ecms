@@ -33,7 +33,7 @@ To deploy the application, we chose Amazon Web Services (AWS) to host our applic
 
 2. To register for an account, click here on the home page:
 
-<img align="center" src="images/1_login.PNG" width="300">
+<center><img src="images/1_login.PNG" width="400"></center>
 
 ![login](images/1_login.PNG)
 
